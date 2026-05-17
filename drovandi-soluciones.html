@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drovandi Soluciones Informáticas — Software a medida</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    /* ── TOKENS ───────────────────────────────────────────────── */
+    :root {
+      --bg:          #0a0a0a;
+      --bg2:         #111111;
+      --bg3:         #181818;
+      --surface:     #161616;
+      --surface2:    #1e1e1e;
+      --red:         #c0152a;
+      --red-bright:  #e8192f;
+      --red-dim:     rgba(192,21,42,0.18);
+      --red-glow:    rgba(192,21,42,0.08);
+      --text:        #f0ece6;
+      --text-mid:    #a09890;
+      --text-dim:    #5a5450;
+      --border:      rgba(240,236,230,0.07);
+      --border-red:  rgba(192,21,42,0.3);
+      --nav-bg:      rgba(10,10,10,0.92);
+      --eagle-opacity: 0.045;
+    }
+    body.light {
+      --bg:          #f5f3f0;
+      --bg2:         #eeebe7;
+      --bg3:         #e8e4df;
+      --surface:     #ffffff;
+      --surface2:    #f9f7f4;
+      --red:         #b01020;
+      --red-bright:  #d0152a;
+      --red-dim:     rgba(176,16,32,0.10);
+      --red-glow:    rgba(176,16,32,0.05);
+      --text:        #111111;
+      --text-mid:    #555555;
+      --text-dim:    #aaaaaa;
+      --border:      rgba(0,0,0,0.09);
+      --border-red:  rgba(176,16,32,0.25);
+      --nav-bg:      rgba(245,243,240,0.94);
+      --eagle-opacity: 0.055;
+    }
+
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
+    html { scroll-behavior:smooth }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      overflow-x: hidden;
+      cursor: none;
+      transition: background .5s, color .5s;
+    }
+
+    /* ── CURSOR ─────────────────────────────────────────────── */
+    .cursor {
+      width: 8px; height: 8px;
+      background: var(--red);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: width .15s, height .15s;
+    }
+    .cursor-ring {
+      width: 34px; height: 34px;
+      border: 1px solid rgba(192,21,42,0.5);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%);
+      transition: width .35s cubic-bezier(.25,.46,.45,.94),
+                  height .35s cubic-bezier(.25,.46,.45,.94),
+                  border-color .3s;
+    }
+    body:has(a:hover) .cursor-ring,
+    body:has(button:hover) .cursor-ring { width:52px; height:52px; border-color:var(--red) }
+
+    /* ── EAGLE BACKGROUND ──────────────────────────────────── */
+    .eagle-bg {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .eagle-bg img {
+      width: min(90vw, 900px);
+      height: auto;
+      opacity: var(--eagle-opacity);
+      transition: opacity .5s;
+      filter: var(--eagle-filter, none);
+    }
+    body.light .eagle-bg img {
+      --eagle-filter: invert(1);
+    }
+
+    /* ── NOISE TEXTURE ────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: .028;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── RED TOP LINE ─────────────────────────────────────── */
+    .top-line {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--red) 30%, var(--red-bright) 50%, var(--red) 70%, transparent);
+      z-index: 9999;
+    }
+
+    /* ── NAV ──────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 2px; left: 0; right: 0;
+      z-index: 500;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 3.5rem;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(20px) saturate(160%);
+      background: var(--nav-bg);
+      transition: background .5s, border-color .5s;
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.35rem;
+      letter-spacing: .35em;
+      color: var(--text);
+      text-transform: uppercase;
+    }
+    .nav-logo em { color: var(--red); font-style: normal }
+    .nav-links { display: flex; gap: 2.5rem }
+    .nav-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: .6rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      transition: color .3s;
+      font-family: 'DM Mono', monospace;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 1px;
+      background: var(--red);
+      transform: scaleX(0);
+      transition: transform .3s;
+      transform-origin: left;
+    }
+    .nav-links a:hover { color: var(--text) }
+    .nav-links a:hover::after { transform: scaleX(1) }
+
+    /* THEME TOGGLE */
+    .theme-toggle {
+      width: 46px; height: 22px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      cursor: none;
+      position: relative;
+      transition: background .3s, border-color .3s;
+    }
+    .theme-toggle::after {
+      content: '';
+      position: absolute;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--red);
+      top: 2px; left: 2px;
+      transition: transform .3s;
+    }
+    body.light .theme-toggle::after { transform: translateX(24px) }
+    .t-icon {
+      position: absolute;
+      font-size: 9px; top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+    .t-icon.moon { right: 4px }
+    .t-icon.sun  { left: 4px; opacity: 0 }
+    body.light .t-icon.sun  { opacity: 1 }
+    body.light .t-icon.moon { opacity: 0 }
+
+    /* ── WHATSAPP ─────────────────────────────────────────── */
+    .wa-float {
+      position: fixed; bottom: 2rem; right: 2rem;
+      z-index: 400;
+      display: flex; flex-direction: column; align-items: flex-end; gap: .5rem;
+    }
+    .wa-tooltip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-mid);
+      font-size: .58rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .3rem .8rem;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateX(8px);
+      transition: opacity .3s, transform .3s;
+      pointer-events: none;
+    }
+    .wa-float:hover .wa-tooltip { opacity: 1; transform: translateX(0) }
+    .wa-btn {
+      width: 52px; height: 52px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; cursor: none;
+      box-shadow: 0 4px 18px rgba(37,211,102,.3);
+      transition: transform .3s, box-shadow .3s;
+      animation: waPulse 2.8s ease-in-out infinite;
+    }
+    .wa-btn:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,.5); animation: none }
+    .wa-btn svg { width: 24px; height: 24px; fill: #fff }
+    @keyframes waPulse {
+      0%,100%{box-shadow:0 4px 18px rgba(37,211,102,.3)}
+      50%{box-shadow:0 4px 26px rgba(37,211,102,.6),0 0 0 8px rgba(37,211,102,.07)}
+    }
+
+    /* ── HERO ─────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
+    }
+    .hero-left {
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 9rem 3.5rem 7rem 4rem;
+      position: relative;
+    }
+
+    .hero-tag {
+      font-size: .58rem;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.8rem;
+      opacity: 0;
+      animation: fadeUp .9s .2s forwards;
+    }
+    .hero-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 7vw, 7.5rem);
+      line-height: .9;
+      color: var(--text);
+      opacity: 0;
+      animation: fadeUp .9s .4s forwards;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .hero-name .red { color: var(--red) }
+    .hero-name .serif {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: .6em;
+      display: block;
+      letter-spacing: .06em;
+      color: var(--text-mid);
+      margin-top: .2em;
+    }
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--text-mid);
+      margin-top: 2.2rem;
+      max-width: 400px;
+      line-height: 1.8;
+      opacity: 0;
+      animation: fadeUp .9s .6s forwards;
+    }
+    .hero-cta {
+      margin-top: 2.8rem;
+      display: flex; gap: 1rem;
+      opacity: 0;
+      animation: fadeUp .9s .8s forwards;
+      flex-wrap: wrap;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background: var(--red);
+      color: #fff;
+      border: none;
+      padding: .9rem 2.2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      cursor: none;
+      text-decoration: none;
+      display: inline-block;
+      transition: background .3s, transform .2s, box-shadow .3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.15) 50%, transparent 70%);
+      transform: translateX(-100%);
+      transition: transform .5s;
+    }
+    .btn-primary:hover { background: var(--red-bright); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(192,21,42,.4) }
+    .btn-primary:hover::after { transform: translateX(100%) }
+    .btn-secondary {
+      border: 1px solid var(--border);
+      color: var(--text-mid);
+      padding: .9rem 2.2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      cursor: none;
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color .3s, color .3s;
+    }
+    .btn-secondary:hover { border-color: var(--red); color: var(--text) }
+
+    /* HERO RIGHT — decorative panel */
+    .hero-right {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      border-left: 1px solid var(--border);
+    }
+    .hero-right-inner {
+      display: flex; flex-direction: column;
+      gap: .8px;
+      width: 100%; height: 100%;
+      position: absolute; inset: 0;
+    }
+    .grid-col {
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+    .grid-row {
+      position: absolute;
+      left: 0; right: 0;
+      height: 1px;
+      background: var(--border);
+    }
+    .hero-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(12rem, 22vw, 22rem);
+      color: rgba(192,21,42,.06);
+      line-height: 1;
+      user-select: none;
+      letter-spacing: -.02em;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-badge {
+      position: absolute;
+      bottom: 4rem; right: 3rem;
+      width: 108px; height: 108px;
+      border-radius: 50%;
+      border: 1px solid var(--border-red);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      font-size: .48rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      animation: spin 22s linear infinite;
+      z-index: 3;
+    }
+    @keyframes spin { to { transform: rotate(360deg) } }
+    .badge-dot {
+      position: absolute;
+      width: 5px; height: 5px;
+      background: var(--red);
+      border-radius: 50%;
+      top: -2.5px; left: 50%; transform: translateX(-50%);
+    }
+    .scroll-indicator {
+      position: absolute; bottom: 2rem; left: 4rem;
+      display: flex; align-items: center; gap: 1rem;
+      font-size: .56rem; letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      z-index: 5;
+    }
+    .scroll-line {
+      width: 38px; height: 1px;
+      background: var(--border);
+      position: relative; overflow: hidden;
+    }
+    .scroll-line::after {
+      content: '';
+      position: absolute; top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: var(--red);
+      animation: slideLine 2s ease-in-out infinite;
+    }
+    @keyframes slideLine { to { left: 100% } }
+
+    /* ── DIVIDER ──────────────────────────────────────────── */
+    .divider {
+      display: flex; align-items: center; gap: 2rem;
+      padding: 2rem 4rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      z-index: 2; position: relative;
+    }
+    .divider-label {
+      font-size: .56rem; letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--text-dim); white-space: nowrap;
+    }
+    .divider-line { flex: 1; height: 1px; background: linear-gradient(to right, var(--border), transparent) }
+    .divider-pills { display: flex; gap: .7rem; flex-wrap: wrap }
+    .pill {
+      border: 1px solid var(--border);
+      padding: .22rem .8rem;
+      font-size: .56rem; letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      transition: border-color .3s, color .3s;
+    }
+    .pill:hover { border-color: var(--red); color: var(--text) }
+
+    /* ── ABOUT ────────────────────────────────────────────── */
+    .about {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+      z-index: 2; position: relative;
+    }
+    .about-text {
+      padding: 7rem 4rem;
+      border-right: 1px solid var(--border);
+    }
+    .section-label {
+      font-size: .56rem; letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--red); margin-bottom: 2rem;
+    }
+    .about-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem,3.5vw,3.2rem);
+      line-height: 1.15;
+      color: var(--text); margin-bottom: 2rem;
+      font-weight: 300;
+    }
+    .about-heading em { font-style: italic; color: var(--red) }
+    .about-body {
+      color: var(--text-mid);
+      font-size: .72rem;
+      line-height: 2.1;
+      max-width: 440px;
+    }
+    .about-ornament {
+      display: flex; align-items: center; gap: 1rem;
+      margin-top: 3rem; padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .orn-line { flex: 1; height: 1px; background: linear-gradient(to right, var(--red), transparent) }
+    .orn-text { font-size: .52rem; letter-spacing: .3em; text-transform: uppercase; color: var(--text-dim); white-space: nowrap }
+    .orn-diamond { color: var(--red); font-size: .9rem; flex-shrink: 0 }
+
+    .about-stats {
+      padding: 7rem 4rem;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .stat-item {
+      padding: 2.2rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: flex-start; gap: 2rem;
+    }
+    .stat-item:first-child { padding-top: 0 }
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.8rem;
+      color: var(--red);
+      line-height: 1; min-width: 85px; font-weight: 400;
+    }
+    .stat-title { font-size: .7rem; color: var(--text); margin-bottom: .4rem; letter-spacing: .05em }
+    .stat-sub { font-size: .6rem; color: var(--text-dim); line-height: 1.75 }
+
+    /* ── MARQUEE ──────────────────────────────────────────── */
+    .pampa-band {
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: .75rem 0;
+      background: var(--bg2);
+      z-index: 2; position: relative;
+    }
+    .pampa-band-inner {
+      display: flex; gap: 2rem;
+      animation: bandScroll 28s linear infinite;
+      white-space: nowrap;
+    }
+    .band-word {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: .85rem; letter-spacing: .42em;
+      text-transform: uppercase;
+      color: var(--text-dim); flex-shrink: 0;
+    }
+    .band-sep { color: var(--red); opacity: .6; flex-shrink: 0 }
+    @keyframes bandScroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* ── PROJECTS ─────────────────────────────────────────── */
+    .projects {
+      padding: 7rem 4rem;
+      z-index: 2; position: relative;
+    }
+    .projects-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 4rem; padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .projects-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 7vw, 6rem);
+      color: var(--text); line-height: 1;
+      text-transform: uppercase;
+    }
+    .projects-count {
+      font-size: .58rem; color: var(--text-dim);
+      letter-spacing: .2em; text-transform: uppercase;
+    }
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1px; background: var(--border);
+    }
+    .project-card {
+      background: var(--bg);
+      padding: 3rem 2.5rem;
+      position: relative; overflow: hidden;
+      transition: background .3s;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--red), var(--red-bright));
+      transform: scaleX(0);
+      transition: transform .5s cubic-bezier(.25,.46,.45,.94);
+      transform-origin: left;
+    }
+    .project-card::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at top left, var(--red-glow), transparent 60%);
+      opacity: 0; transition: opacity .5s;
+    }
+    .project-card:hover { background: var(--surface) }
+    .project-card:hover::before { transform: scaleX(1) }
+    .project-card:hover::after { opacity: 1 }
+    .project-index {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem;
+      color: rgba(192,21,42,.05);
+      position: absolute; top: .5rem; right: 1.5rem;
+      line-height: 1;
+    }
+    .project-tag {
+      font-size: .52rem; letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--red); margin-bottom: 1.5rem;
+    }
+    .project-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem; color: var(--text);
+      letter-spacing: .06em; margin-bottom: 1.2rem;
+      text-transform: uppercase;
+    }
+    .project-desc {
+      font-size: .68rem; color: var(--text-mid);
+      line-height: 1.9; margin-bottom: 2rem;
+    }
+    .project-tech { display: flex; flex-wrap: wrap; gap: .4rem }
+    .tech-tag {
+      font-size: .52rem; letter-spacing: .1em;
+      padding: .2rem .6rem;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      text-transform: uppercase;
+      transition: border-color .3s, color .3s;
+    }
+    .project-card:hover .tech-tag { border-color: var(--border-red); color: var(--text-mid) }
+    .project-arrow {
+      position: absolute; bottom: 2rem; right: 2rem;
+      width: 32px; height: 32px;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-dim); font-size: .9rem;
+      transition: border-color .3s, color .3s, transform .3s;
+    }
+    .project-card:hover .project-arrow {
+      border-color: var(--red); color: var(--red);
+      transform: translate(3px,-3px);
+    }
+
+    /* ── SERVICES ─────────────────────────────────────────── */
+    .services {
+      padding: 7rem 4rem;
+      border-top: 1px solid var(--border);
+      background: var(--bg2);
+      z-index: 2; position: relative;
+    }
+    .services-label { margin-bottom: 3.5rem }
+    .services-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; }
+    .service-item {
+      padding: 2.5rem;
+      border-left: 1px solid var(--border);
+      transition: background .3s;
+      position: relative;
+    }
+    .service-item:first-child { border-left: none }
+    .service-item::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 1px; background: var(--border);
+      transition: background .3s;
+    }
+    .service-item:hover { background: var(--bg3) }
+    .service-item:hover::before { background: var(--red) }
+    .service-icon { font-size: 1.3rem; margin-bottom: 1.4rem; color: var(--red) }
+    .service-name {
+      font-size: .72rem; color: var(--text);
+      margin-bottom: .8rem; letter-spacing: .06em; font-weight: 500;
+    }
+    .service-desc { font-size: .62rem; color: var(--text-dim); line-height: 1.9 }
+
+    /* ── CONTACT ──────────────────────────────────────────── */
+    .contact {
+      padding: 9rem 4rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 7rem;
+      border-top: 1px solid var(--border);
+      z-index: 2; position: relative;
+    }
+    .contact-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      line-height: .95; color: var(--text);
+      margin-bottom: 2rem; font-weight: 300;
+    }
+    .contact-heading span { color: var(--red); font-style: italic }
+    .contact-sub {
+      font-size: .7rem; color: var(--text-mid);
+      line-height: 2; margin-bottom: 3rem; max-width: 380px;
+    }
+    .contact-info { display: flex; flex-direction: column; gap: 1rem }
+    .contact-info-item {
+      display: flex; align-items: center; gap: 1rem;
+      font-size: .64rem; color: var(--text-mid);
+      padding: .7rem 0; border-bottom: 1px solid var(--border);
+    }
+    .contact-info-item span:first-child {
+      color: var(--red); font-size: .56rem;
+      letter-spacing: .2em; text-transform: uppercase; min-width: 75px;
+    }
+
+    /* Form */
+    .contact-form { display: flex; flex-direction: column; gap: 1.5rem }
+    .form-group { display: flex; flex-direction: column; gap: .5rem }
+    .form-label {
+      font-size: .56rem; letter-spacing: .25em;
+      text-transform: uppercase; color: var(--text-dim);
+    }
+    .form-input, .form-textarea {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: .9rem 1.1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: .72rem; width: 100%;
+      transition: border-color .3s, box-shadow .3s;
+      outline: none; cursor: none;
+    }
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px var(--red-glow);
+    }
+    .form-textarea { resize: vertical; min-height: 140px }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem }
+    .form-submit {
+      background: var(--red);
+      color: #fff; border: none;
+      padding: 1rem 2.2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: .62rem; letter-spacing: .2em;
+      text-transform: uppercase; cursor: none;
+      transition: background .3s, box-shadow .3s, transform .2s;
+      align-self: flex-start;
+    }
+    .form-submit:hover {
+      background: var(--red-bright);
+      box-shadow: 0 6px 24px rgba(192,21,42,.4);
+      transform: translateY(-2px);
+    }
+    .form-note { font-size: .56rem; color: var(--text-dim); line-height: 1.75 }
+    .success-msg {
+      display: none;
+      background: var(--red-dim);
+      border: 1px solid var(--border-red);
+      padding: 1rem 1.5rem;
+      font-size: .65rem; color: var(--red); letter-spacing: .1em;
+    }
+
+    /* ── FOOTER ───────────────────────────────────────────── */
+    footer {
+      padding: 2.5rem 4rem;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      z-index: 2; position: relative;
+      background: var(--bg);
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem; letter-spacing: .25em;
+      color: var(--text-dim); text-transform: uppercase;
+    }
+    .footer-copy { font-size: .56rem; color: var(--text-dim); letter-spacing: .15em }
+    .footer-links { display: flex; gap: 2rem }
+    .footer-links a {
+      font-size: .56rem; color: var(--text-dim); text-decoration: none;
+      letter-spacing: .15em; text-transform: uppercase;
+      transition: color .3s;
+    }
+    .footer-links a:hover { color: var(--red) }
+
+    /* ── ANIMATIONS ───────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px) }
+      to   { opacity: 1; transform: translateY(0) }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0 } to { opacity: 1 }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity .9s cubic-bezier(.25,.46,.45,.94),
+                  transform .9s cubic-bezier(.25,.46,.45,.94);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0) }
+
+    /* ── RESPONSIVE ────────────────────────────────────────── */
+    @media(max-width:900px) {
+      nav { padding: 1rem 1.4rem }
+      .nav-links { display: none }
+      .hero { grid-template-columns: 1fr }
+      .hero-right { display: none }
+      .hero-left { padding: 8rem 2rem 5rem }
+      .about { grid-template-columns: 1fr }
+      .about-text { padding: 4.5rem 2rem; border-right: none; border-bottom: 1px solid var(--border) }
+      .about-stats { padding: 4.5rem 2rem }
+      .projects { padding: 4.5rem 2rem }
+      .projects-grid { grid-template-columns: 1fr }
+      .services { padding: 4.5rem 2rem }
+      .services-grid { grid-template-columns: repeat(2,1fr) }
+      .service-item:first-child { border-left: none }
+      .service-item:nth-child(3) { border-left: none }
+      .contact { grid-template-columns: 1fr; padding: 5rem 2rem; gap: 3.5rem }
+      footer { flex-direction: column; gap: 1rem; padding: 2rem; text-align: center }
+      .divider { padding: 1.8rem 2rem }
+      .wa-float { bottom: 1.2rem; right: 1.2rem }
+    }
+  </style>
+</head>
+<body>
+
+<!-- EAGLE BACKGROUND -->
+<div class="eagle-bg" aria-hidden="true">
+  <img src="crow.png" alt="">
+</div>
+
+<div class="top-line"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- WHATSAPP -->
+<div class="wa-float">
+  <div class="wa-tooltip">Escríbenos por WhatsApp</div>
+  <a class="wa-btn" href="https://wa.me/34600000000" target="_blank" rel="noopener" title="WhatsApp">
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.83.737 5.485 2.027 7.793L0 32l8.418-2.004A15.93 15.93 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 01-6.788-1.857l-.487-.288-4.998 1.189 1.27-4.852-.318-.499A13.267 13.267 0 012.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.933c-.398-.199-2.355-1.162-2.72-1.295-.366-.133-.632-.199-.898.2-.266.398-1.031 1.295-1.264 1.56-.232.267-.465.3-.863.1-.398-.2-1.68-.62-3.2-1.977-1.183-1.056-1.981-2.36-2.214-2.758-.232-.398-.025-.613.175-.812.18-.178.398-.465.597-.698.2-.232.266-.398.398-.664.133-.266.066-.499-.034-.698-.1-.2-.898-2.163-1.23-2.96-.324-.778-.653-.672-.898-.685l-.765-.013c-.266 0-.698.1-1.064.499-.366.398-1.396 1.363-1.396 3.326s1.43 3.859 1.629 4.125c.2.266 2.814 4.297 6.817 6.026.953.412 1.697.657 2.277.841.957.305 1.828.262 2.516.159.767-.114 2.355-.963 2.688-1.893.333-.93.333-1.728.233-1.893-.099-.166-.365-.266-.763-.465z"/></svg>
+  </a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Drovandi Software</div>
+  <div class="nav-links">
+    <a href="#nosotros">Nosotros</a>
+    <a href="#proyectos">Proyectos</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:.7rem;flex-shrink:0">
+    <button class="theme-toggle" id="themeToggle" title="Modo día/noche" aria-label="Cambiar tema">
+      <span class="t-icon moon">🌙</span>
+      <span class="t-icon sun">☀️</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-tag">// Software a Medida · Especialización en Hormigón · España</p>
+    <h1 class="hero-name">
+      Drovandi<br>
+      <span class="red">Soluciones</span>
+      <span class="serif">Informáticas</span>
+    </h1>
+    <p class="hero-sub">Desarrollamos software que entiende los procesos reales de tu empresa, con especialización en plantas de hormigón y tecnologías en tendencia.</p>
+    <div class="hero-cta">
+      <a href="#proyectos" class="btn-primary">Ver proyectos</a>
+      <a href="#contacto" class="btn-secondary">Contactar</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <!-- Decorative grid -->
+    <div class="grid-col" style="left:25%"></div>
+    <div class="grid-col" style="left:50%"></div>
+    <div class="grid-col" style="left:75%"></div>
+    <div class="grid-row" style="top:25%"></div>
+    <div class="grid-row" style="top:50%"></div>
+    <div class="grid-row" style="top:75%"></div>
+    <div class="hero-number">17</div>
+  </div>
+  <div class="scroll-indicator"><div class="scroll-line"></div><span>scroll</span></div>
+</section>
+
+<!-- DIVIDER STACK -->
+<div class="divider reveal">
+  <span class="divider-label">Stack tecnológico</span>
+  <div class="divider-line"></div>
+  <div class="divider-pills">
+    <span class="pill">HTML</span>
+    <span class="pill">CSS</span>
+    <span class="pill">JavaScript</span>
+    <span class="pill">React</span>
+    <span class="pill">Tailwind</span>
+    <span class="pill">PostgreSQL</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="nosotros">
+  <div class="about-text reveal">
+    <p class="section-label">// 01 — Quiénes somos</p>
+    <h2 class="about-heading">Código que nació<br /><em>en la llanura</em></h2>
+    <p class="about-body">En Drovandi Soluciones Informáticas desarrollamos soluciones digitales a medida que hablan el idioma de los negocios reales: logística, producción, control y trazabilidad.<br /><br />No solo construimos software — entendemos los procesos detrás de cada empresa. Eso nos permite crear herramientas que se integran de verdad con el trabajo cotidiano, reduciendo fricciones y aumentando la eficiencia operativa desde el primer día.</p>
+    <div class="about-ornament">
+      <div class="orn-line"></div>
+      <span class="orn-diamond">◆</span>
+      <span class="orn-text">España</span>
+      <span class="orn-diamond">◆</span>
+      <div class="orn-line" style="background:linear-gradient(to left,var(--red),transparent)"></div>
+    </div>
+  </div>
+  <div class="about-stats reveal">
+    <div class="stat-item">
+      <div class="stat-number">03</div>
+      <div class="stat-desc">
+        <div class="stat-title">Proyectos activos</div>
+        <div class="stat-sub">Plataformas en desarrollo para el sector del hormigón en la región.</div>
+      </div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">∞</div>
+      <div class="stat-desc">
+        <div class="stat-title">Kilómetros de horizonte</div>
+        <div class="stat-sub">Dashboards conectados en tiempo real a los datos de producción de nuestros clientes.</div>
+      </div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">01</div>
+      <div class="stat-desc">
+        <div class="stat-title">Foco total en el cliente</div>
+        <div class="stat-sub">Especialización en software a medida: si lo imaginás, lo construimos.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="pampa-band">
+  <div class="pampa-band-inner">
+    <span class="band-word">Tecnología</span><span class="band-sep">—</span>
+    <span class="band-word">Software</span><span class="band-sep">—</span>
+    <span class="band-word">Eficiencia</span><span class="band-sep">—</span>
+    <span class="band-word">España</span><span class="band-sep">—</span>
+    <span class="band-word">Innovación</span><span class="band-sep">—</span>
+    <span class="band-word">Velocidad</span><span class="band-sep">—</span>
+    <span class="band-word">Código</span><span class="band-sep">—</span>
+    <span class="band-word">Horizonte</span><span class="band-sep">—</span>
+    <span class="band-word">Tecnología</span><span class="band-sep">—</span>
+    <span class="band-word">Software</span><span class="band-sep">—</span>
+    <span class="band-word">Eficiencia</span><span class="band-sep">—</span>
+    <span class="band-word">España</span><span class="band-sep">—</span>
+    <span class="band-word">Innovación</span><span class="band-sep">—</span>
+    <span class="band-word">Velocidad</span><span class="band-sep">—</span>
+    <span class="band-word">Código</span><span class="band-sep">—</span>
+    <span class="band-word">Horizonte</span><span class="band-sep">—</span>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<section class="projects" id="proyectos">
+  <div class="projects-header reveal">
+    <h2 class="projects-title">Proyectos</h2>
+    <span class="projects-count">03 iniciativas activas</span>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <div class="project-index">01</div>
+      <p class="project-tag">// Comunidad · Conocimiento</p>
+      <h3 class="project-name">RedHormigon</h3>
+      <p class="project-desc">Red profesional para el sector del hormigón. Tenemos más de 400 plantas registradas y un sistema para encontrar la planta más cercana a ti.</p>
+      <div class="project-tech">
+        <span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">PostgreSQL</span>
+      </div>
+      <div class="project-arrow">→</div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-index">02</div>
+      <p class="project-tag">// Tipificaciones · Hormigón</p>
+      <h3 class="project-name">GenHorm</h3>
+      <p class="project-desc">Sistema de generación de tipificaciones para el sector del hormigón. Toda la información del tema disponible en un solo lugar.</p>
+      <div class="project-tech">
+        <span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">Tailwind CSS</span>
+      </div>
+      <div class="project-arrow">→</div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-index">03</div>
+      <p class="project-tag">// Logística · Trazabilidad</p>
+      <h3 class="project-name">LogisticHorm</h3>
+      <p class="project-desc">Proximamente...</p>
+      <div class="project-tech">
+        <span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">Tailwind CSS</span>
+      </div>
+      <div class="project-arrow">→</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="servicios">
+  <p class="section-label services-label reveal">// 03 — Qué podemos hacer por tu empresa</p>
+  <div class="services-grid">
+    <div class="service-item reveal">
+      <div class="service-icon">◈</div>
+      <div class="service-name">Software a medida</div>
+      <div class="service-desc">Aplicaciones diseñadas desde cero para resolver exactamente tu problema, sin compromisos.</div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-icon">⬡</div>
+      <div class="service-name">Sistemas de gestión</div>
+      <div class="service-desc">Sistemas de control y gestión diseñados específicamente para tu proceso productivo, desde cero.</div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-icon">◎</div>
+      <div class="service-name">Digitalización de procesos</div>
+      <div class="service-desc">Transformamos planillas y papel en flujos digitales eficientes, trazables y seguros.</div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-icon">◷</div>
+      <div class="service-name">Dashboards y analítica</div>
+      <div class="service-desc">Paneles de control en tiempo real conectados a tus datos de producción y calidad.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contacto">
+  <div class="contact-left reveal">
+    <p class="section-label">// 04 — Contacto</p>
+    <h2 class="contact-heading">¿Tienes un proyecto<br />en <span>mente?</span></h2>
+    <p class="contact-sub">Cuentanos qué necesitás. Ya sea un desarrollo desde cero, una integración o una mejora de proceso — si tiene que ver con software, es nuestro territorio.</p>
+    <div class="contact-info">
+      <div class="contact-info-item"><span>Ubicación</span><span>España</span></div>
+      <div class="contact-info-item"><span>Sector</span><span>Software · Tecnología · Hormigón</span></div>
+      <div class="contact-info-item"><span>Disponible</span><span>Proyectos nuevos · Colaboraciones</span></div>
+    </div>
+  </div>
+  <div class="contact-right reveal">
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Nombre</label><input type="text" class="form-input" id="iNombre" placeholder="Tu nombre"/></div>
+        <div class="form-group"><label class="form-label">Empresa</label><input type="text" class="form-input" id="iEmpresa" placeholder="Tu empresa"/></div>
+      </div>
+      <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="iEmail" placeholder="tu@email.com"/></div>
+      <div class="form-group"><label class="form-label">Tipo de proyecto</label><input type="text" class="form-input" id="iProyecto" placeholder="Ej: Sistema de gestión para mi empresa"/></div>
+      <div class="form-group"><label class="form-label">Mensaje</label><textarea class="form-textarea" id="iMensaje" placeholder="Contanos sobre tu proyecto o necesidad..."></textarea></div>
+      <div class="success-msg" id="successMsg">✓ Mensaje enviado. Te respondemos en menos de 24h.</div>
+      <button class="form-submit" onclick="handleSubmit()">Enviar mensaje →</button>
+      <p class="form-note">Respondemos en menos de 24h. Sin spam, sin vueltas. Solo trabajo real.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Drovandi Soluciones Informáticas</div>
+  <div class="footer-copy">© 2025 · España · Software a medida</div>
+  <div class="footer-links">
+    <a href="#nosotros">Nosotros</a>
+    <a href="#proyectos">Proyectos</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+</footer>
+
+<script>
+  // THEME
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    document.body.classList.toggle('light');
+  });
+
+  // CURSOR
+  const cur = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx=0, my=0, rx=0, ry=0;
+  document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+  (function loop(){
+    cur.style.left  = mx + 'px'; cur.style.top  = my + 'px';
+    rx += (mx-rx)*.11; ry += (my-ry)*.11;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(loop);
+  })();
+
+  // REVEAL
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: .1 });
+  document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+
+  // FORM
+  function handleSubmit(){
+    const n = document.getElementById('iNombre').value.trim();
+    const e = document.getElementById('iEmail').value.trim();
+    const m = document.getElementById('iMensaje').value.trim();
+    if(!n||!e||!m){ alert('Por favor, completá al menos nombre, email y mensaje.'); return; }
+    const sm = document.getElementById('successMsg');
+    sm.style.display = 'block';
+    ['iNombre','iEmpresa','iEmail','iProyecto','iMensaje'].forEach(id => document.getElementById(id).value='');
+    setTimeout(() => sm.style.display='none', 5000);
+  }
+</script>
+</body>
+</html>
