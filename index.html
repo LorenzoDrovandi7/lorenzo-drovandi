@@ -3,7 +3,48 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Araian Softworks</title>
+  <title>Lorenzo Drovandi · Desarrollador Full-Stack · Portfolio</title>
+  <meta name="description" content="Portfolio de Lorenzo Drovandi, desarrollador full-stack especializado en software a medida, plantas de hormigón y tecnologías modernas. Proyectos, servicios y contacto." />
+  <meta name="keywords" content="Lorenzo Drovandi, desarrollador full-stack, portfolio, software a medida, hormigón, React, JavaScript, España" />
+  <meta name="author" content="Lorenzo Drovandi" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://lorenzodrovandi7.github.io/araian-softworks/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Lorenzo Drovandi · Desarrollador Full-Stack" />
+  <meta property="og:description" content="Desarrollo soluciones digitales a medida que entienden los procesos reales de tu empresa." />
+  <meta property="og:url" content="https://lorenzodrovandi7.github.io/araian-softworks/" />
+  <meta property="og:locale" content="es_ES" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Lorenzo Drovandi · Desarrollador Full-Stack" />
+  <meta name="twitter:description" content="Desarrollo soluciones digitales a medida que entienden los procesos reales de tu empresa." />
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f5f3f0" media="(prefers-color-scheme: light)" />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23c0152a'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='sans-serif' font-size='20' font-weight='bold' fill='%23fff'%3EL%3C/text%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23c0152a'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='sans-serif' font-size='20' font-weight='bold' fill='%23fff'%3EL%3C/text%3E%3C/svg%3E" />
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Lorenzo Drovandi",
+    "jobTitle": "Desarrollador Full-Stack",
+    "url": "https://lorenzodrovandi7.github.io/araian-softworks/",
+    "email": "lorenzodrovandi17@gmail.com",
+    "knowsAbout": ["Desarrollo de software", "React", "JavaScript", "PostgreSQL", "Tailwind CSS"],
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Lorenzo Drovandi"
+    }
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
@@ -19,9 +60,9 @@
       --red-bright:  #e8192f;
       --red-dim:     rgba(192,21,42,0.18);
       --red-glow:    rgba(192,21,42,0.08);
-      --text:        #f0ece6;
-      --text-mid:    #a09890;
-      --text-dim:    #5a5450;
+      --text:        #ffffff;
+      --text-mid:    #c8c0b8;
+      --text-dim:    #9a9088;
       --border:      rgba(240,236,230,0.07);
       --border-red:  rgba(192,21,42,0.3);
       --nav-bg:      rgba(10,10,10,0.92);
@@ -37,9 +78,9 @@
       --red-bright:  #d0152a;
       --red-dim:     rgba(176,16,32,0.10);
       --red-glow:    rgba(176,16,32,0.05);
-      --text:        #111111;
-      --text-mid:    #555555;
-      --text-dim:    #aaaaaa;
+      --text:        #000000;
+      --text-mid:    #333333;
+      --text-dim:    #555555;
       --border:      rgba(0,0,0,0.09);
       --border-red:  rgba(176,16,32,0.25);
       --nav-bg:      rgba(245,243,240,0.94);
@@ -52,6 +93,7 @@
       background: var(--bg);
       color: var(--text);
       font-family: 'DM Mono', monospace;
+      font-size: 20px;
       overflow-x: hidden;
       cursor: none;
       transition: background .5s, color .5s;
@@ -92,17 +134,73 @@
       z-index: 0;
       overflow: hidden;
     }
+    .eagle-bg::after {
+      content: '';
+      position: absolute;
+      width: min(90vw, 900px);
+      height: min(90vw, 900px);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(192,21,42,0.06) 0%, transparent 70%);
+      animation: crowGlow 4s ease-in-out infinite;
+      pointer-events: none;
+    }
     .eagle-bg img {
       width: min(90vw, 900px);
       height: auto;
       opacity: var(--eagle-opacity);
       transition: opacity .5s;
       filter: var(--eagle-filter, none);
+      animation: crowFloat 6s ease-in-out infinite;
     }
-    body.light .eagle-bg img {
-      --eagle-filter: invert(1);
+    body.light .eagle-bg::after {
+      background: radial-gradient(circle, rgba(176,16,32,0.04) 0%, transparent 70%);
+    }
+    @keyframes crowFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg) }
+      33%      { transform: translateY(-12px) rotate(0.8deg) }
+      66%      { transform: translateY(6px) rotate(-0.6deg) }
+    }
+    @keyframes crowGlow {
+      0%, 100% { opacity: 0.4; transform: scale(1) }
+      50%      { opacity: 1; transform: scale(1.08) }
     }
 
+    /* ── GOTHIC PARTICLES ──────────────────────────────────── */
+    .gothic-particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .gothic-particles span {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: var(--red);
+      border-radius: 50%;
+      opacity: 0;
+      animation: ember 6s ease-in-out infinite;
+      box-shadow: 0 0 4px var(--red), 0 0 8px var(--red-dim);
+    }
+    .gothic-particles span:nth-child(1)  { left: 20%; top: 30%; animation-delay: 0s; animation-duration: 5s }
+    .gothic-particles span:nth-child(2)  { left: 70%; top: 20%; animation-delay: 1.2s; animation-duration: 7s }
+    .gothic-particles span:nth-child(3)  { left: 40%; top: 70%; animation-delay: 2.5s; animation-duration: 6s }
+    .gothic-particles span:nth-child(4)  { left: 80%; top: 60%; animation-delay: 0.8s; animation-duration: 5.5s }
+    .gothic-particles span:nth-child(5)  { left: 10%; top: 50%; animation-delay: 3s; animation-duration: 8s }
+    .gothic-particles span:nth-child(6)  { left: 55%; top: 80%; animation-delay: 1.8s; animation-duration: 6.5s }
+    .gothic-particles span:nth-child(7)  { left: 90%; top: 40%; animation-delay: 4s; animation-duration: 4.5s }
+    .gothic-particles span:nth-child(8)  { left: 30%; top: 10%; animation-delay: 0.5s; animation-duration: 7.5s }
+    .gothic-particles span:nth-child(9)  { left: 65%; top: 90%; animation-delay: 3.5s; animation-duration: 5.8s }
+    .gothic-particles span:nth-child(10) { left: 50%; top: 45%; animation-delay: 2s; animation-duration: 6.2s }
+    .gothic-particles span:nth-child(11) { left: 15%; top: 75%; animation-delay: 1.5s; animation-duration: 7.2s }
+    .gothic-particles span:nth-child(12) { left: 85%; top: 15%; animation-delay: 4.5s; animation-duration: 4.8s }
+    @keyframes ember {
+      0%   { opacity: 0; transform: translateY(20px) scale(0.5) }
+      20%  { opacity: 0.6; transform: translateY(0px) scale(1) }
+      80%  { opacity: 0.3; transform: translateY(-30px) scale(0.8) }
+      100% { opacity: 0; transform: translateY(-60px) scale(0.2) }
+    }
     /* ── NOISE TEXTURE ────────────────────────────────────── */
     body::before {
       content: '';
@@ -146,7 +244,7 @@
     .nav-links a {
       color: var(--text-dim);
       text-decoration: none;
-      font-size: .6rem;
+      font-size: .78rem;
       letter-spacing: .28em;
       text-transform: uppercase;
       transition: color .3s;
@@ -197,44 +295,6 @@
     body.light .t-icon.sun  { opacity: 1 }
     body.light .t-icon.moon { opacity: 0 }
 
-    /* ── WHATSAPP ─────────────────────────────────────────── */
-    .wa-float {
-      position: fixed; bottom: 2rem; right: 2rem;
-      z-index: 400;
-      display: flex; flex-direction: column; align-items: flex-end; gap: .5rem;
-    }
-    .wa-tooltip {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text-mid);
-      font-size: .58rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      padding: .3rem .8rem;
-      white-space: nowrap;
-      opacity: 0;
-      transform: translateX(8px);
-      transition: opacity .3s, transform .3s;
-      pointer-events: none;
-    }
-    .wa-float:hover .wa-tooltip { opacity: 1; transform: translateX(0) }
-    .wa-btn {
-      width: 52px; height: 52px;
-      background: #25D366;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      text-decoration: none; cursor: none;
-      box-shadow: 0 4px 18px rgba(37,211,102,.3);
-      transition: transform .3s, box-shadow .3s;
-      animation: waPulse 2.8s ease-in-out infinite;
-    }
-    .wa-btn:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,.5); animation: none }
-    .wa-btn svg { width: 24px; height: 24px; fill: #fff }
-    @keyframes waPulse {
-      0%,100%{box-shadow:0 4px 18px rgba(37,211,102,.3)}
-      50%{box-shadow:0 4px 26px rgba(37,211,102,.6),0 0 0 8px rgba(37,211,102,.07)}
-    }
-
     /* ── HERO ─────────────────────────────────────────────── */
     .hero {
       min-height: 100vh;
@@ -252,7 +312,7 @@
     }
 
     .hero-tag {
-      font-size: .58rem;
+      font-size: .75rem;
       letter-spacing: .32em;
       text-transform: uppercase;
       color: var(--red);
@@ -283,7 +343,7 @@
     }
     .hero-sub {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.05rem;
+      font-size: 1.2rem;
       font-weight: 300;
       color: var(--text-mid);
       margin-top: 2.2rem;
@@ -307,7 +367,7 @@
       border: none;
       padding: .9rem 2.2rem;
       font-family: 'DM Mono', monospace;
-      font-size: .6rem;
+      font-size: .78rem;
       letter-spacing: .22em;
       text-transform: uppercase;
       cursor: none;
@@ -331,7 +391,7 @@
       color: var(--text-mid);
       padding: .9rem 2.2rem;
       font-family: 'DM Mono', monospace;
-      font-size: .6rem;
+      font-size: .78rem;
       letter-spacing: .22em;
       text-transform: uppercase;
       cursor: none;
@@ -384,7 +444,7 @@
       border: 1px solid var(--border-red);
       display: flex; align-items: center; justify-content: center;
       text-align: center;
-      font-size: .48rem;
+      font-size: .65rem;
       letter-spacing: .15em;
       text-transform: uppercase;
       color: var(--text-dim);
@@ -402,7 +462,7 @@
     .scroll-indicator {
       position: absolute; bottom: 2rem; left: 4rem;
       display: flex; align-items: center; gap: 1rem;
-      font-size: .56rem; letter-spacing: .28em;
+      font-size: .72rem; letter-spacing: .28em;
       text-transform: uppercase;
       color: var(--text-dim);
       z-index: 5;
@@ -430,7 +490,7 @@
       z-index: 2; position: relative;
     }
     .divider-label {
-      font-size: .56rem; letter-spacing: .3em;
+      font-size: .7rem; letter-spacing: .3em;
       text-transform: uppercase;
       color: var(--text-dim); white-space: nowrap;
     }
@@ -439,7 +499,7 @@
     .pill {
       border: 1px solid var(--border);
       padding: .22rem .8rem;
-      font-size: .56rem; letter-spacing: .15em;
+      font-size: .7rem; letter-spacing: .15em;
       text-transform: uppercase;
       color: var(--text-dim);
       transition: border-color .3s, color .3s;
@@ -457,7 +517,7 @@
       border-right: 1px solid var(--border);
     }
     .section-label {
-      font-size: .56rem; letter-spacing: .3em;
+      font-size: .72rem; letter-spacing: .3em;
       text-transform: uppercase;
       color: var(--red); margin-bottom: 2rem;
     }
@@ -471,9 +531,9 @@
     .about-heading em { font-style: italic; color: var(--red) }
     .about-body {
       color: var(--text-mid);
-      font-size: .72rem;
+      font-size: .85rem;
       line-height: 2.1;
-      max-width: 440px;
+      max-width: 480px;
     }
     .about-ornament {
       display: flex; align-items: center; gap: 1rem;
@@ -481,7 +541,7 @@
       border-top: 1px solid var(--border);
     }
     .orn-line { flex: 1; height: 1px; background: linear-gradient(to right, var(--red), transparent) }
-    .orn-text { font-size: .52rem; letter-spacing: .3em; text-transform: uppercase; color: var(--text-dim); white-space: nowrap }
+    .orn-text { font-size: .7rem; letter-spacing: .3em; text-transform: uppercase; color: var(--text-dim); white-space: nowrap }
     .orn-diamond { color: var(--red); font-size: .9rem; flex-shrink: 0 }
 
     .about-stats {
@@ -500,8 +560,8 @@
       color: var(--red);
       line-height: 1; min-width: 85px; font-weight: 400;
     }
-    .stat-title { font-size: .7rem; color: var(--text); margin-bottom: .4rem; letter-spacing: .05em }
-    .stat-sub { font-size: .6rem; color: var(--text-dim); line-height: 1.75 }
+    .stat-title { font-size: .85rem; color: var(--text); margin-bottom: .4rem; letter-spacing: .05em }
+    .stat-sub { font-size: .78rem; color: var(--text-dim); line-height: 1.75 }
 
     /* ── MARQUEE ──────────────────────────────────────────── */
     .pampa-band {
@@ -519,7 +579,7 @@
     }
     .band-word {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: .85rem; letter-spacing: .42em;
+      font-size: 1rem; letter-spacing: .42em;
       text-transform: uppercase;
       color: var(--text-dim); flex-shrink: 0;
     }
@@ -543,7 +603,7 @@
       text-transform: uppercase;
     }
     .projects-count {
-      font-size: .58rem; color: var(--text-dim);
+      font-size: .75rem; color: var(--text-dim);
       letter-spacing: .2em; text-transform: uppercase;
     }
     .projects-grid {
@@ -582,7 +642,7 @@
       line-height: 1;
     }
     .project-tag {
-      font-size: .52rem; letter-spacing: .25em;
+      font-size: .7rem; letter-spacing: .25em;
       text-transform: uppercase;
       color: var(--red); margin-bottom: 1.5rem;
     }
@@ -593,12 +653,12 @@
       text-transform: uppercase;
     }
     .project-desc {
-      font-size: .68rem; color: var(--text-mid);
+      font-size: .82rem; color: var(--text-mid);
       line-height: 1.9; margin-bottom: 2rem;
     }
     .project-tech { display: flex; flex-wrap: wrap; gap: .4rem }
     .tech-tag {
-      font-size: .52rem; letter-spacing: .1em;
+      font-size: .65rem; letter-spacing: .1em;
       padding: .2rem .6rem;
       border: 1px solid var(--border);
       color: var(--text-dim);
@@ -645,10 +705,10 @@
     .service-item:hover::before { background: var(--red) }
     .service-icon { font-size: 1.3rem; margin-bottom: 1.4rem; color: var(--red) }
     .service-name {
-      font-size: .72rem; color: var(--text);
+      font-size: .85rem; color: var(--text);
       margin-bottom: .8rem; letter-spacing: .06em; font-weight: 500;
     }
-    .service-desc { font-size: .62rem; color: var(--text-dim); line-height: 1.9 }
+    .service-desc { font-size: .78rem; color: var(--text-dim); line-height: 1.9 }
 
     /* ── CONTACT ──────────────────────────────────────────── */
     .contact {
@@ -665,17 +725,17 @@
     }
     .contact-heading span { color: var(--red); font-style: italic }
     .contact-sub {
-      font-size: .7rem; color: var(--text-mid);
+      font-size: .85rem; color: var(--text-mid);
       line-height: 2; margin-bottom: 3rem; max-width: 380px;
     }
     .contact-info { display: flex; flex-direction: column; gap: 1rem }
     .contact-info-item {
       display: flex; align-items: center; gap: 1rem;
-      font-size: .64rem; color: var(--text-mid);
+      font-size: .8rem; color: var(--text-mid);
       padding: .7rem 0; border-bottom: 1px solid var(--border);
     }
     .contact-info-item span:first-child {
-      color: var(--red); font-size: .56rem;
+      color: var(--red); font-size: .72rem;
       letter-spacing: .2em; text-transform: uppercase; min-width: 75px;
     }
 
@@ -683,7 +743,7 @@
     .contact-form { display: flex; flex-direction: column; gap: 1.5rem }
     .form-group { display: flex; flex-direction: column; gap: .5rem }
     .form-label {
-      font-size: .56rem; letter-spacing: .25em;
+      font-size: .72rem; letter-spacing: .25em;
       text-transform: uppercase; color: var(--text-dim);
     }
     .form-input, .form-textarea {
@@ -692,7 +752,7 @@
       color: var(--text);
       padding: .9rem 1.1rem;
       font-family: 'DM Mono', monospace;
-      font-size: .72rem; width: 100%;
+      font-size: .85rem; width: 100%;
       transition: border-color .3s, box-shadow .3s;
       outline: none; cursor: none;
     }
@@ -707,7 +767,7 @@
       color: #fff; border: none;
       padding: 1rem 2.2rem;
       font-family: 'DM Mono', monospace;
-      font-size: .62rem; letter-spacing: .2em;
+      font-size: .78rem; letter-spacing: .2em;
       text-transform: uppercase; cursor: none;
       transition: background .3s, box-shadow .3s, transform .2s;
       align-self: flex-start;
@@ -717,36 +777,61 @@
       box-shadow: 0 6px 24px rgba(192,21,42,.4);
       transform: translateY(-2px);
     }
-    .form-note { font-size: .56rem; color: var(--text-dim); line-height: 1.75 }
+    .form-note { font-size: .72rem; color: var(--text-dim); line-height: 1.75 }
     .success-msg {
       display: none;
       background: var(--red-dim);
       border: 1px solid var(--border-red);
       padding: 1rem 1.5rem;
-      font-size: .65rem; color: var(--red); letter-spacing: .1em;
+      font-size: .8rem; color: var(--red); letter-spacing: .1em;
     }
 
-    /* ── FOOTER ───────────────────────────────────────────── */
+/* ── FOOTER ───────────────────────────────────────────── */
     footer {
       padding: 2.5rem 4rem;
       border-top: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
       z-index: 2; position: relative;
       background: var(--bg);
+    }
+    .footer-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
     }
     .footer-logo {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1rem; letter-spacing: .25em;
       color: var(--text-dim); text-transform: uppercase;
     }
-    .footer-copy { font-size: .56rem; color: var(--text-dim); letter-spacing: .15em }
+    .footer-copy { font-size: .72rem; color: var(--text-dim); letter-spacing: .15em }
     .footer-links { display: flex; gap: 2rem }
     .footer-links a {
-      font-size: .56rem; color: var(--text-dim); text-decoration: none;
+      font-size: .72rem; color: var(--text-dim); text-decoration: none;
       letter-spacing: .15em; text-transform: uppercase;
       transition: color .3s;
     }
     .footer-links a:hover { color: var(--red) }
+    .footer-legal {
+      display: flex;
+      gap: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      width: 100%;
+      justify-content: center;
+    }
+    .footer-legal a {
+      font-size: .62rem;
+      color: var(--text-mid);
+      text-decoration: none;
+      letter-spacing: .1em;
+      transition: color .3s;
+    }
+    .footer-legal a:hover { color: var(--red) }
 
     /* ── ANIMATIONS ───────────────────────────────────────── */
     @keyframes fadeUp {
@@ -764,25 +849,99 @@
     .reveal.visible { opacity: 1; transform: translateY(0) }
 
     /* ── RESPONSIVE ────────────────────────────────────────── */
+    @media (hover: none) and (pointer: coarse) {
+      .cursor, .cursor-ring { display: none }
+      body { cursor: auto }
+    }
+
+    @media(max-width:1200px) {
+      .hero-left { padding: 9rem 2.5rem 7rem 2.5rem }
+      .about-text { padding: 5rem 2.5rem }
+      .about-stats { padding: 5rem 2.5rem }
+      .projects { padding: 5rem 2.5rem }
+      .services { padding: 5rem 2.5rem }
+      .contact { padding: 6rem 2.5rem; gap: 4rem }
+      .project-card { padding: 2.5rem 2rem }
+      .service-item { padding: 2rem 1.8rem }
+    }
+
     @media(max-width:900px) {
-      nav { padding: 1rem 1.4rem }
+      nav {
+        padding: .8rem 1.5rem;
+      }
       .nav-links { display: none }
       .hero { grid-template-columns: 1fr }
       .hero-right { display: none }
-      .hero-left { padding: 8rem 2rem 5rem }
+      .hero-left { padding: 7rem 1.5rem 4rem }
+      .hero-name { font-size: clamp(3rem, 12vw, 4.5rem) }
+      .hero-sub { font-size: 1.05rem; max-width: 100% }
+      .hero-tag { font-size: .65rem }
+      .hero-cta { gap: .8rem }
+      .btn-primary, .btn-secondary { font-size: .7rem; padding: .8rem 1.6rem; width: 100%; text-align: center }
       .about { grid-template-columns: 1fr }
-      .about-text { padding: 4.5rem 2rem; border-right: none; border-bottom: 1px solid var(--border) }
-      .about-stats { padding: 4.5rem 2rem }
-      .projects { padding: 4.5rem 2rem }
+      .about-text { padding: 4rem 1.5rem; border-right: none; border-bottom: 1px solid var(--border) }
+      .about-body { font-size: .8rem; max-width: 100% }
+      .about-stats { padding: 4rem 1.5rem }
+      .stat-item { gap: 1.2rem; padding: 1.8rem 0 }
+      .stat-number { font-size: 3rem; min-width: 65px }
+      .stat-title { font-size: .8rem }
+      .stat-sub { font-size: .72rem }
+      .projects { padding: 4rem 1.5rem }
+      .projects-header { margin-bottom: 2.5rem; padding-bottom: 1.5rem; flex-direction: column; align-items: flex-start; gap: .8rem }
+      .projects-title { font-size: clamp(2.5rem, 10vw, 3.5rem) }
       .projects-grid { grid-template-columns: 1fr }
-      .services { padding: 4.5rem 2rem }
-      .services-grid { grid-template-columns: repeat(2,1fr) }
+      .project-card { padding: 2rem 1.5rem }
+      .project-name { font-size: 1.8rem }
+      .project-desc { font-size: .78rem }
+      .services { padding: 4rem 1.5rem }
+      .services-grid { grid-template-columns: 1fr }
+      .service-item { padding: 2rem 1.5rem; border-left: none; border-bottom: 1px solid var(--border) }
       .service-item:first-child { border-left: none }
-      .service-item:nth-child(3) { border-left: none }
-      .contact { grid-template-columns: 1fr; padding: 5rem 2rem; gap: 3.5rem }
-      footer { flex-direction: column; gap: 1rem; padding: 2rem; text-align: center }
-      .divider { padding: 1.8rem 2rem }
-      .wa-float { bottom: 1.2rem; right: 1.2rem }
+      .service-item:last-child { border-bottom: none }
+      .service-name { font-size: .8rem }
+      .service-desc { font-size: .72rem }
+      .contact { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 3rem }
+      .contact-heading { font-size: clamp(2.2rem, 8vw, 2.8rem) }
+      .contact-sub { font-size: .8rem; max-width: 100% }
+      .contact-info-item { font-size: .75rem }
+      .form-row { grid-template-columns: 1fr }
+      .form-input, .form-textarea { font-size: .8rem }
+      .footer-main { flex-direction: column; gap: 1rem; text-align: center }
+      footer { padding: 2rem 1.5rem }
+      .footer-legal { gap: 1.2rem; flex-wrap: wrap }
+      .footer-legal a { font-size: .62rem }
+    }
+
+    @media(max-width:480px) {
+      body { font-size: 18px }
+      nav { padding: .7rem 1rem }
+      .nav-logo { font-size: 1.1rem }
+      .hero-left { padding: 6rem 1rem 3rem }
+      .hero-tag { font-size: .58rem; letter-spacing: .2em }
+      .hero-name { font-size: clamp(2.5rem, 14vw, 3rem) }
+      .hero-sub { font-size: .95rem; margin-top: 1.5rem }
+      .hero-cta { margin-top: 2rem }
+      .about-text { padding: 3rem 1rem }
+      .about-stats { padding: 3rem 1rem }
+      .stat-number { font-size: 2.5rem; min-width: 55px }
+      .projects { padding: 3rem 1rem }
+      .services { padding: 3rem 1rem }
+      .service-item { padding: 1.5rem 1rem }
+      .contact { padding: 3rem 1rem; gap: 2rem }
+      .contact-info-item { flex-direction: column; align-items: flex-start; gap: .3rem }
+      .projects-count { font-size: .65rem }
+      .footer-main { flex-direction: column; gap: .8rem; text-align: center }
+      footer { padding: 1.5rem 1rem }
+      .footer-logo { font-size: .85rem }
+      .footer-legal { flex-direction: column; align-items: center; gap: .8rem }
+      .footer-legal a { font-size: .58rem }
+      .divider { padding: 1.2rem 1rem }
+      .pampa-band-inner { animation-duration: 16s; gap: 1rem }
+      .band-word { font-size: .75rem; letter-spacing: .3em }
+      .about-heading { font-size: clamp(1.5rem, 7vw, 1.8rem) }
+      .contact-heading { font-size: clamp(1.8rem, 9vw, 2.2rem) }
+      .hero-number { font-size: clamp(8rem, 30vw, 12rem) }
+      .eagle-bg img { width: 100vw; opacity: calc(var(--eagle-opacity) * 1.5) }
     }
   </style>
 </head>
@@ -790,24 +949,23 @@
 
 <!-- EAGLE BACKGROUND -->
 <div class="eagle-bg" aria-hidden="true">
-  <img src="crow.png" alt="">
+  <img src="crow.webp" alt="Cuervo — logo decorativo del portfolio de Lorenzo Drovandi">
 </div>
 
 <div class="top-line"></div>
+<div class="gothic-particles" aria-hidden="true">
+  <span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span>
+</div>
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
-<!-- WHATSAPP -->
-<div class="wa-float">
-  <div class="wa-tooltip">Escríbenos por WhatsApp</div>
-  <a class="wa-btn" href="https://wa.me/34600000000" target="_blank" rel="noopener" title="WhatsApp">
-    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.83.737 5.485 2.027 7.793L0 32l8.418-2.004A15.93 15.93 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 01-6.788-1.857l-.487-.288-4.998 1.189 1.27-4.852-.318-.499A13.267 13.267 0 012.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.933c-.398-.199-2.355-1.162-2.72-1.295-.366-.133-.632-.199-.898.2-.266.398-1.031 1.295-1.264 1.56-.232.267-.465.3-.863.1-.398-.2-1.68-.62-3.2-1.977-1.183-1.056-1.981-2.36-2.214-2.758-.232-.398-.025-.613.175-.812.18-.178.398-.465.597-.698.2-.232.266-.398.398-.664.133-.266.066-.499-.034-.698-.1-.2-.898-2.163-1.23-2.96-.324-.778-.653-.672-.898-.685l-.765-.013c-.266 0-.698.1-1.064.499-.366.398-1.396 1.363-1.396 3.326s1.43 3.859 1.629 4.125c.2.266 2.814 4.297 6.817 6.026.953.412 1.697.657 2.277.841.957.305 1.828.262 2.516.159.767-.114 2.355-.963 2.688-1.893.333-.93.333-1.728.233-1.893-.099-.166-.365-.266-.763-.465z"/></svg>
-  </a>
-</div>
+
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Araian Softworks</div>
+  <div class="nav-logo">Lorenzo Drovandi</div>
   <div class="nav-links">
     <a href="#nosotros">Nosotros</a>
     <a href="#proyectos">Proyectos</a>
@@ -822,15 +980,17 @@
   </div>
 </nav>
 
+<!-- MAIN CONTENT -->
+<main>
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <p class="hero-tag">// Software a Medida · Especialización en Hormigón · España</p>
+    <p class="hero-tag">// Desarrollador Full-Stack · Software a Medida · España</p>
     <h1 class="hero-name">
-      Araian<br>
-      <span class="red">Softworks</span>
+      Lorenzo<br>
+      <span class="red">Drovandi</span>
     </h1>
-    <p class="hero-sub">Desarrollamos software que entiende los procesos reales de tu empresa, con especialización en plantas de hormigón y tecnologías en tendencia.</p>
+    <p class="hero-sub">Desarrollo soluciones digitales a medida que entienden los procesos reales de tu empresa, con especialización en plantas de hormigón y tecnologías modernas.</p>
     <div class="hero-cta">
       <a href="#proyectos" class="btn-primary">Ver proyectos</a>
       <a href="#contacto" class="btn-secondary">Contactar</a>
@@ -866,9 +1026,9 @@
 <!-- ABOUT -->
 <section class="about" id="nosotros">
   <div class="about-text reveal">
-    <p class="section-label">// 01 — Quiénes somos</p>
+    <p class="section-label">// 01 — Sobre mí</p>
     <h2 class="about-heading">Código que nació<br /><em>ambicioso.</em></h2>
-    <p class="about-body">En Araian Softworks desarrollamos soluciones digitales a medida que hablan el idioma de los negocios reales: logística, producción, control y trazabilidad.<br /><br />No solo construimos software — entendemos los procesos detrás de cada empresa. Eso nos permite crear herramientas que se integran de verdad con el trabajo cotidiano, reduciendo fricciones y aumentando la eficiencia operativa desde el primer día.</p>
+    <p class="about-body">Soy Lorenzo Drovandi, desarrollador full-stack apasionado por construir soluciones digitales que hablan el idioma de los negocios reales: logística, producción, control y trazabilidad.<br /><br />No solo escribo código — entiendo los procesos detrás de cada empresa. Eso me permite crear herramientas que se integran de verdad con el trabajo cotidiano, reduciendo fricciones y aumentando la eficiencia operativa desde el primer día.</p>
     <div class="about-ornament">
       <div class="orn-line"></div>
       <span class="orn-diamond">◆</span>
@@ -889,7 +1049,7 @@
       <div class="stat-number">∞</div>
       <div class="stat-desc">
         <div class="stat-title">Kilómetros de horizonte</div>
-        <div class="stat-sub">Dashboards conectados en tiempo real a los datos de producción de nuestros clientes.</div>
+        <div class="stat-sub">Dashboards conectados en tiempo real a los datos de producción de clientes.</div>
       </div>
     </div>
     <div class="stat-item">
@@ -966,7 +1126,7 @@
 
 <!-- SERVICES -->
 <section class="services" id="servicios">
-  <p class="section-label services-label reveal">// 03 — Qué podemos hacer por tu empresa</p>
+  <p class="section-label services-label reveal">// 03 — Qué puedo hacer por tu empresa</p>
   <div class="services-grid">
     <div class="service-item reveal">
       <div class="service-icon">◈</div>
@@ -996,7 +1156,7 @@
   <div class="contact-left reveal">
     <p class="section-label">// 04 — Contacto</p>
     <h2 class="contact-heading">¿Tienes un proyecto<br />en <span>mente?</span></h2>
-    <p class="contact-sub">Cuentanos qué necesitás. Ya sea un desarrollo desde cero, una integración o una mejora de proceso — si tiene que ver con software, es nuestro territorio.</p>
+    <p class="contact-sub">Contame qué necesitás. Ya sea un desarrollo desde cero, una integración o una mejora de proceso — si tiene que ver con software, es mi territorio.</p>
     <div class="contact-info">
       <div class="contact-info-item"><span>Ubicación</span><span>España</span></div>
       <div class="contact-info-item"><span>Sector</span><span>Software · Tecnología · Hormigón</span></div>
@@ -1012,21 +1172,25 @@
       <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="iEmail" placeholder="tu@email.com"/></div>
       <div class="form-group"><label class="form-label">Tipo de proyecto</label><input type="text" class="form-input" id="iProyecto" placeholder="Ej: Sistema de gestión para mi empresa"/></div>
       <div class="form-group"><label class="form-label">Mensaje</label><textarea class="form-textarea" id="iMensaje" placeholder="Contanos sobre tu proyecto o necesidad..."></textarea></div>
-      <div class="success-msg" id="successMsg">✓ Mensaje enviado. Te respondemos en menos de 24h.</div>
+      <div class="success-msg" id="successMsg">✓ Mensaje enviado. Te respondo en menos de 24h.</div>
       <button class="form-submit" onclick="handleSubmit()">Enviar mensaje →</button>
-      <p class="form-note">Respondemos en menos de 24h. Sin spam, sin vueltas. Solo trabajo real.</p>
+      <p class="form-note">Respondo en menos de 24h. Sin spam, sin vueltas. Solo trabajo real.</p>
     </div>
   </div>
 </section>
 
+</main>
+
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Araian Softworks</div>
-  <div class="footer-copy">© 2025 · España · Software a medida</div>
-  <div class="footer-links">
-    <a href="#nosotros">Nosotros</a>
-    <a href="#proyectos">Proyectos</a>
-    <a href="#contacto">Contacto</a>
+  <div class="footer-main">
+    <div class="footer-logo">Lorenzo Drovandi</div>
+    <div class="footer-copy">© 2026 · Software a medida</div>
+  </div>
+  <div class="footer-legal">
+    <a href="politica_cookies.html">Política de Cookies</a>
+    <a href="politica_privacidad.html">Política de Privacidad</a>
+    <a href="aviso_legal.html">Aviso Legal</a>
   </div>
 </footer>
 
