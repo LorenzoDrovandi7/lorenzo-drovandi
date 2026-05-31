@@ -785,6 +785,18 @@
       padding: 1rem 1.5rem;
       font-size: .8rem; color: var(--red); letter-spacing: .1em;
     }
+    .error-msg {
+      display: none;
+      background: rgba(192,21,42,0.1);
+      border: 1px solid rgba(192,21,42,0.4);
+      padding: 1rem 1.5rem;
+      font-size: .75rem; color: var(--red-bright); letter-spacing: .05em;
+      line-height: 1.6;
+    }
+    .form-submit.loading {
+      pointer-events: none;
+      opacity: .6;
+    }
 
 /* ── FOOTER ───────────────────────────────────────────── */
     footer {
@@ -1164,18 +1176,19 @@
     </div>
   </div>
   <div class="contact-right reveal">
-    <div class="contact-form">
+    <form class="contact-form" id="contactForm">
       <div class="form-row">
-        <div class="form-group"><label class="form-label">Nombre</label><input type="text" class="form-input" id="iNombre" placeholder="Tu nombre"/></div>
-        <div class="form-group"><label class="form-label">Empresa</label><input type="text" class="form-input" id="iEmpresa" placeholder="Tu empresa"/></div>
+        <div class="form-group"><label class="form-label" for="iNombre">Nombre</label><input type="text" class="form-input" id="iNombre" name="nombre" placeholder="Tu nombre" required/></div>
+        <div class="form-group"><label class="form-label" for="iEmpresa">Empresa</label><input type="text" class="form-input" id="iEmpresa" name="empresa" placeholder="Tu empresa"/></div>
       </div>
-      <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="iEmail" placeholder="tu@email.com"/></div>
-      <div class="form-group"><label class="form-label">Tipo de proyecto</label><input type="text" class="form-input" id="iProyecto" placeholder="Ej: Sistema de gestión para mi empresa"/></div>
-      <div class="form-group"><label class="form-label">Mensaje</label><textarea class="form-textarea" id="iMensaje" placeholder="Contanos sobre tu proyecto o necesidad..."></textarea></div>
+      <div class="form-group"><label class="form-label" for="iEmail">Email</label><input type="email" class="form-input" id="iEmail" name="email" placeholder="tu@email.com" required/></div>
+      <div class="form-group"><label class="form-label" for="iProyecto">Tipo de proyecto</label><input type="text" class="form-input" id="iProyecto" name="proyecto" placeholder="Ej: Sistema de gestión para mi empresa"/></div>
+      <div class="form-group"><label class="form-label" for="iMensaje">Mensaje</label><textarea class="form-textarea" id="iMensaje" name="mensaje" placeholder="Contanos sobre tu proyecto o necesidad..." required></textarea></div>
       <div class="success-msg" id="successMsg">✓ Mensaje enviado. Te respondo en menos de 24h.</div>
-      <button class="form-submit" onclick="handleSubmit()">Enviar mensaje →</button>
+      <div class="error-msg" id="errorMsg">✗ Error al enviar. Intentalo de nuevo o escribime directamente a lorenzodrovandi17@gmail.com</div>
+      <button class="form-submit" id="formSubmitBtn" type="submit">Enviar mensaje →</button>
       <p class="form-note">Respondo en menos de 24h. Sin spam, sin vueltas. Solo trabajo real.</p>
-    </div>
+    </form>
   </div>
 </section>
 
@@ -1221,16 +1234,46 @@
   document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
 
   // FORM
-  function handleSubmit(){
-    const n = document.getElementById('iNombre').value.trim();
-    const e = document.getElementById('iEmail').value.trim();
-    const m = document.getElementById('iMensaje').value.trim();
-    if(!n||!e||!m){ alert('Por favor, completá al menos nombre, email y mensaje.'); return; }
+  const FORM_ENDPOINT = 'https://formspree.io/f/xxxxxxx'; // Reemplazar con tu endpoint de Formspree
+
+  document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('formSubmitBtn');
     const sm = document.getElementById('successMsg');
-    sm.style.display = 'block';
-    ['iNombre','iEmpresa','iEmail','iProyecto','iMensaje'].forEach(id => document.getElementById(id).value='');
-    setTimeout(() => sm.style.display='none', 5000);
-  }
+    const em = document.getElementById('errorMsg');
+    sm.style.display = 'none';
+    em.style.display = 'none';
+    btn.classList.add('loading');
+    btn.textContent = 'Enviando...';
+
+    const data = {
+      nombre: document.getElementById('iNombre').value.trim(),
+      email: document.getElementById('iEmail').value.trim(),
+      empresa: document.getElementById('iEmpresa').value.trim(),
+      proyecto: document.getElementById('iProyecto').value.trim(),
+      mensaje: document.getElementById('iMensaje').value.trim()
+    };
+
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (res.ok) {
+        sm.style.display = 'block';
+        this.reset();
+      } else {
+        em.style.display = 'block';
+      }
+    } catch {
+      em.style.display = 'block';
+    }
+
+    btn.classList.remove('loading');
+    btn.textContent = 'Enviar mensaje →';
+    setTimeout(() => { sm.style.display = 'none'; em.style.display = 'none'; }, 6000);
+  });
 </script>
 </body>
 </html>
