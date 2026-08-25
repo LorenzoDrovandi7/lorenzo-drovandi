@@ -3,44 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lorenzo Drovandi · Desarrollador Full-Stack · Portfolio</title>
-  <meta name="description" content="Portfolio de Lorenzo Drovandi, desarrollador full-stack especializado en software a medida, plantas de hormigón y tecnologías modernas. Proyectos, servicios y contacto." />
-  <meta name="keywords" content="Lorenzo Drovandi, desarrollador full-stack, portfolio, software a medida, hormigón, React, JavaScript, España" />
-  <meta name="author" content="Lorenzo Drovandi" />
+  <title>Drovandi Softworks · Desarrollador Full-Stack · Portfolio</title>
+  <meta name="description" content="Drovandi Softworks, desarrollador full-stack especializado en software a medida, plantas de hormigón y tecnologías modernas. Proyectos, servicios y contacto." />
+  <meta name="keywords" content="Drovandi Softworks, desarrollador full-stack, portfolio, software a medida, hormigón, React, JavaScript, España" />
+  <meta name="author" content="Drovandi Softworks" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://lorenzodrovandi7.github.io/araian-softworks/" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Lorenzo Drovandi · Desarrollador Full-Stack" />
+  <meta property="og:title" content="Drovandi Softworks · Desarrollador Full-Stack" />
   <meta property="og:description" content="Desarrollo soluciones digitales a medida que entienden los procesos reales de tu empresa." />
-  <meta property="og:url" content="https://lorenzodrovandi7.github.io/araian-softworks/" />
   <meta property="og:locale" content="es_ES" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Lorenzo Drovandi · Desarrollador Full-Stack" />
+  <meta name="twitter:title" content="Drovandi Softworks · Desarrollador Full-Stack" />
   <meta name="twitter:description" content="Desarrollo soluciones digitales a medida que entienden los procesos reales de tu empresa." />
 
   <!-- Theme Color -->
   <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
   <meta name="theme-color" content="#f5f3f0" media="(prefers-color-scheme: light)" />
 
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23c0152a'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='sans-serif' font-size='20' font-weight='bold' fill='%23fff'%3EL%3C/text%3E%3C/svg%3E">
-  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23c0152a'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='sans-serif' font-size='20' font-weight='bold' fill='%23fff'%3EL%3C/text%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": "Lorenzo Drovandi",
+    "name": "Drovandi Softworks",
     "jobTitle": "Desarrollador Full-Stack",
     "url": "https://lorenzodrovandi7.github.io/araian-softworks/",
     "email": "lorenzodrovandi17@gmail.com",
     "knowsAbout": ["Desarrollo de software", "React", "JavaScript", "PostgreSQL", "Tailwind CSS"],
     "worksFor": {
       "@type": "Organization",
-      "name": "Lorenzo Drovandi"
+      "name": "Drovandi Softworks"
     }
   }
   </script>
@@ -122,48 +122,6 @@
     }
     body:has(a:hover) .cursor-ring,
     body:has(button:hover) .cursor-ring { width:52px; height:52px; border-color:var(--red) }
-
-    /* ── EAGLE BACKGROUND ──────────────────────────────────── */
-    .eagle-bg {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
-    .eagle-bg::after {
-      content: '';
-      position: absolute;
-      width: min(90vw, 900px);
-      height: min(90vw, 900px);
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(192,21,42,0.06) 0%, transparent 70%);
-      animation: crowGlow 4s ease-in-out infinite;
-      pointer-events: none;
-    }
-    .eagle-bg img {
-      width: min(90vw, 900px);
-      height: auto;
-      opacity: var(--eagle-opacity);
-      transition: opacity .5s;
-      filter: var(--eagle-filter, none);
-      animation: crowFloat 6s ease-in-out infinite;
-    }
-    body.light .eagle-bg::after {
-      background: radial-gradient(circle, rgba(176,16,32,0.04) 0%, transparent 70%);
-    }
-    @keyframes crowFloat {
-      0%, 100% { transform: translateY(0px) rotate(0deg) }
-      33%      { transform: translateY(-12px) rotate(0.8deg) }
-      66%      { transform: translateY(6px) rotate(-0.6deg) }
-    }
-    @keyframes crowGlow {
-      0%, 100% { opacity: 0.4; transform: scale(1) }
-      50%      { opacity: 1; transform: scale(1.08) }
-    }
 
     /* ── GOTHIC PARTICLES ──────────────────────────────────── */
     .gothic-particles {
@@ -290,6 +248,7 @@
       pointer-events: none;
       transition: opacity .3s;
     }
+    body.light .hero-number { background: radial-gradient(circle, rgba(0, 0, 0, 0.1) 0%, transparent 72%) }
     .t-icon.moon { right: 4px }
     .t-icon.sun  { left: 4px; opacity: 0 }
     body.light .t-icon.sun  { opacity: 1 }
@@ -427,14 +386,11 @@
       background: var(--border);
     }
     .hero-number {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(12rem, 22vw, 22rem);
-      color: rgba(192,21,42,.06);
-      line-height: 1;
-      user-select: none;
-      letter-spacing: -.02em;
-      position: relative;
-      z-index: 2;
+      width: min(38vw, 900px);
+      height: min(38vw, 900px);
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 72%);
+      pointer-events: none;
+      opacity: 100%;
     }
     .hero-badge {
       position: absolute;
@@ -959,11 +915,6 @@
 </head>
 <body>
 
-<!-- EAGLE BACKGROUND -->
-<div class="eagle-bg" aria-hidden="true">
-  <img src="crow.webp" alt="Cuervo — logo decorativo del portfolio de Lorenzo Drovandi">
-</div>
-
 <div class="top-line"></div>
 <div class="gothic-particles" aria-hidden="true">
   <span></span><span></span><span></span><span></span><span></span>
@@ -977,7 +928,7 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Lorenzo Drovandi</div>
+  <div class="nav-logo">Drovandi Softworks</div>
   <div class="nav-links">
     <a href="#nosotros">Nosotros</a>
     <a href="#proyectos">Proyectos</a>
@@ -997,12 +948,12 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <p class="hero-tag">// Desarrollador Full-Stack · Software a Medida · España</p>
+    <p class="hero-tag">// Desarrollo de Software · Proyectos a Medida · Asesoramiento</p>
     <h1 class="hero-name">
-      Lorenzo<br>
-      <span class="red">Drovandi</span>
+      Drovandi<br>
+      <span class="red">Softworks</span>
     </h1>
-    <p class="hero-sub">Desarrollo soluciones digitales a medida que entienden los procesos reales de tu empresa, con especialización en plantas de hormigón y tecnologías modernas.</p>
+    <p class="hero-sub">Desarrollamos soluciones digitales a medida que entienden los procesos reales de tu empresa, con especialización en plantas de hormigón y tecnologías modernas.</p>
     <div class="hero-cta">
       <a href="#proyectos" class="btn-primary">Ver proyectos</a>
       <a href="#contacto" class="btn-secondary">Contactar</a>
@@ -1016,7 +967,7 @@
     <div class="grid-row" style="top:25%"></div>
     <div class="grid-row" style="top:50%"></div>
     <div class="grid-row" style="top:75%"></div>
-    <div class="hero-number">17</div>
+    <img class="hero-number" src="dsvg.webp" alt="Logo de Drovandi Softworks">
   </div>
   <div class="scroll-indicator"><div class="scroll-line"></div><span>scroll</span></div>
 </section>
@@ -1038,13 +989,13 @@
 <!-- ABOUT -->
 <section class="about" id="nosotros">
   <div class="about-text reveal">
-    <p class="section-label">// 01 — Sobre mí</p>
+    <p class="section-label">// 01 — Sobre nosotros</p>
     <h2 class="about-heading">Código que nació<br /><em>ambicioso.</em></h2>
     <p class="about-body">Soy Lorenzo Drovandi, desarrollador full-stack apasionado por construir soluciones digitales que hablan el idioma de los negocios reales: logística, producción, control y trazabilidad.<br /><br />No solo escribo código — entiendo los procesos detrás de cada empresa. Eso me permite crear herramientas que se integran de verdad con el trabajo cotidiano, reduciendo fricciones y aumentando la eficiencia operativa desde el primer día.</p>
     <div class="about-ornament">
       <div class="orn-line"></div>
       <span class="orn-diamond">◆</span>
-      <span class="orn-text">Ambición</span>
+      <span class="orn-text">Drovandi Softworks</span>
       <span class="orn-diamond">◆</span>
       <div class="orn-line" style="background:linear-gradient(to left,var(--red),transparent)"></div>
     </div>
@@ -1060,7 +1011,7 @@
     <div class="stat-item">
       <div class="stat-number">∞</div>
       <div class="stat-desc">
-        <div class="stat-title">Kilómetros de horizonte</div>
+        <div class="stat-title">Trazabilidad</div>
         <div class="stat-sub">Dashboards conectados en tiempo real a los datos de producción de clientes.</div>
       </div>
     </div>
@@ -1107,7 +1058,7 @@
       <div class="project-index">01</div>
       <p class="project-tag">// Comunidad · Conocimiento</p>
       <h3 class="project-name">RedHormigon</h3>
-      <p class="project-desc">Red profesional para el sector del hormigón. Tenemos más de 400 plantas registradas y un sistema para encontrar la planta más cercana a ti.</p>
+      <p class="project-desc">Red profesional para el sector del hormigón. Tenemos más de 9000 plantas registradas y un sistema para encontrar la planta más cercana a ti.</p>
       <div class="project-tech">
         <span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">PostgreSQL</span>
       </div>
@@ -1168,7 +1119,7 @@
   <div class="contact-left reveal">
     <p class="section-label">// 04 — Contacto</p>
     <h2 class="contact-heading">¿Tienes un proyecto<br />en <span>mente?</span></h2>
-    <p class="contact-sub">Contame qué necesitás. Ya sea un desarrollo desde cero, una integración o una mejora de proceso — si tiene que ver con software, es mi territorio.</p>
+    <p class="contact-sub">Cuentame qué necesitás. Ya sea un desarrollo desde cero, una integración o una mejora de proceso — si tiene que ver con software, es mi territorio.</p>
     <div class="contact-info">
       <div class="contact-info-item"><span>Ubicación</span><span>España</span></div>
       <div class="contact-info-item"><span>Sector</span><span>Software · Tecnología · Hormigón</span></div>
