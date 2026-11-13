@@ -700,6 +700,28 @@
     }
     .service-desc { font-size: .78rem; color: var(--text-dim); line-height: 1.9 }
 
+    /* ── CERTIFICADOS ─────────────────────────────────────── */
+    .cert-grid {
+      display: grid; grid-template-columns: repeat(2,1fr); gap: 0;
+      border-top: 1px solid var(--border);
+    }
+    .cert-item {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 1.5rem;
+      padding: 1.4rem 1.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .cert-item:nth-child(odd) { border-right: 1px solid var(--border) }
+    .cert-name { font-size: .85rem; color: var(--text); margin-bottom: .3rem; letter-spacing: .03em }
+    .cert-meta { font-size: .72rem; color: var(--text-dim); letter-spacing: .05em }
+    .cert-link {
+      flex-shrink: 0;
+      font-size: .72rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--accent-ink); text-decoration: none; white-space: nowrap;
+      transition: color .3s;
+    }
+    .cert-link:hover { color: var(--text) }
+
     /* ── CONTACT ──────────────────────────────────────────── */
     .contact {
       padding: 9rem 4rem;
@@ -935,6 +957,8 @@
       .service-item { padding: 2rem 1.5rem; border-left: none; border-bottom: 1px solid var(--border) }
       .service-item:first-child { border-left: none }
       .service-item:last-child { border-bottom: none }
+      .cert-grid { grid-template-columns: 1fr }
+      .cert-item:nth-child(odd) { border-right: none }
       .service-name { font-size: .8rem }
       .service-desc { font-size: .72rem }
       .contact { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 3rem }
@@ -1001,6 +1025,7 @@
     <a href="#proyectos">Proyectos</a>
     <a href="#trayectoria">Trayectoria</a>
     <a href="#servicios">Servicios</a>
+    <a href="#formacion">Formación</a>
     <a href="#contacto">Contacto</a>
   </div>
   <div style="display:flex;align-items:center;gap:.7rem;flex-shrink:0">
@@ -1279,10 +1304,53 @@
   </div>
 </section>
 
+<!-- FORMACION -->
+<section class="services" id="formacion">
+  <p class="section-label services-label reveal">// 05 — Formación</p>
+  <div class="cert-grid">
+    <div class="cert-item reveal">
+      <div><div class="cert-name">Git y GitHub</div><div class="cert-meta">TodoCode · nov 2025 · Git, GitHub</div></div>
+    </div>
+    <div class="cert-item reveal">
+      <div><div class="cert-name">Algoritmos y Programación</div><div class="cert-meta">TodoCode · nov 2025 · Algoritmos, Programación</div></div>
+    </div>
+    <div class="cert-item reveal">
+      <div><div class="cert-name">Front End Development Libraries</div><div class="cert-meta">freeCodeCamp · sep 2025 · React</div></div>
+      <a class="cert-link" href="https://www.freecodecamp.org/certification/lorenzodrovandi17/front-end-development-libraries" target="_blank" rel="noopener">Ver credencial →</a>
+    </div>
+    <div class="cert-item reveal">
+      <div><div class="cert-name">Data Visualization</div><div class="cert-meta">freeCodeCamp · sep 2025 · Visualización de datos</div></div>
+      <a class="cert-link" href="https://www.freecodecamp.org/certification/lorenzodrovandi17/data-visualization" target="_blank" rel="noopener">Ver credencial →</a>
+    </div>
+    <div class="cert-item reveal">
+      <div><div class="cert-name">Legacy Front End</div><div class="cert-meta">freeCodeCamp · sep 2025 · JavaScript</div></div>
+      <a class="cert-link" href="https://www.freecodecamp.org/certification/lorenzodrovandi17/legacy-front-end" target="_blank" rel="noopener">Ver credencial →</a>
+    </div>
+    <div class="cert-item reveal">
+      <div><div class="cert-name">EF SET English Certificate · B2</div><div class="cert-meta">EF SET · jun 2025 · 56/100 Upper Intermediate</div></div>
+    </div>
+    <div class="cert-item reveal">
+      <div><div class="cert-name">HTML y CSS</div><div class="cert-meta">TodoCode · may 2025 · HTML5, CSS</div></div>
+    </div>
+    <div class="cert-item reveal">
+      <div><div class="cert-name">Legacy JavaScript Algorithms and Data Structures</div><div class="cert-meta">freeCodeCamp · may 2025 · JavaScript</div></div>
+      <a class="cert-link" href="https://www.freecodecamp.org/certification/lorenzodrovandi17/legacy-javascript-algorithms-and-data-structures" target="_blank" rel="noopener">Ver credencial →</a>
+    </div>
+    <div class="cert-item reveal">
+      <div><div class="cert-name">JavaScript Algorithms and Data Structures</div><div class="cert-meta">freeCodeCamp · ene 2025 · JavaScript, JSON</div></div>
+      <a class="cert-link" href="https://www.freecodecamp.org/certification/lorenzodrovandi17/javascript-algorithms-and-data-structures" target="_blank" rel="noopener">Ver credencial →</a>
+    </div>
+    <div class="cert-item reveal">
+      <div><div class="cert-name">Responsive Web Design</div><div class="cert-meta">freeCodeCamp · jun 2024 · HTML, CSS, JavaScript</div></div>
+      <a class="cert-link" href="https://www.freecodecamp.org/certification/lorenzodrovandi17/responsive-web-design" target="_blank" rel="noopener">Ver credencial →</a>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section class="contact" id="contacto">
   <div class="contact-left reveal">
-    <p class="section-label">// 05 — Contacto</p>
+    <p class="section-label">// 06 — Contacto</p>
     <h2 class="contact-heading">¿Tienes un proyecto<br />en <span>mente?</span></h2>
     <p class="contact-sub">Cuéntame qué necesitas. Ya sea un desarrollo desde cero, una integración o una mejora de proceso — si tiene que ver con software, es mi territorio.</p>
     <div class="contact-info">
