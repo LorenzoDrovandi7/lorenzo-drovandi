@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lorenzo Drovandi · Desarrollador Full-Stack · Portfolio</title>
   <meta name="description" content="Lorenzo Drovandi, desarrollador full-stack especializado en software a medida, plantas de hormigón y tecnologías modernas. Proyectos, servicios y contacto." />
-  <meta name="keywords" content="Lorenzo Drovandi, desarrollador full-stack, portfolio, software a medida, hormigón, React, JavaScript" />
+  <meta name="keywords" content="Lorenzo Drovandi, desarrollador full-stack, portfolio, software a medida, hormigón, Next.js, JavaScript" />
   <meta name="author" content="Lorenzo Drovandi" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://lorenzodrovandi7.github.io/lorenzo-drovandi/" />
@@ -16,11 +16,16 @@
   <meta property="og:title" content="Lorenzo Drovandi · Desarrollador Full-Stack" />
   <meta property="og:description" content="Desarrollo soluciones digitales a medida que entienden los procesos reales de tu empresa." />
   <meta property="og:locale" content="es_ES" />
+  <meta property="og:image" content="https://lorenzodrovandi7.github.io/lorenzo-drovandi/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Logotipo LD de Lorenzo Drovandi" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Lorenzo Drovandi · Desarrollador Full-Stack" />
   <meta name="twitter:description" content="Desarrollo soluciones digitales a medida que entienden los procesos reales de tu empresa." />
+  <meta name="twitter:image" content="https://lorenzodrovandi7.github.io/lorenzo-drovandi/og.png" />
 
   <!-- Theme Color -->
   <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
@@ -39,7 +44,7 @@
     "jobTitle": "Desarrollador Full-Stack",
     "url": "https://lorenzodrovandi7.github.io/lorenzo-drovandi/",
     "email": "lorenzodrovandi17@gmail.com",
-    "knowsAbout": ["Desarrollo de software", "React", "JavaScript", "PostgreSQL", "Tailwind CSS"],
+    "knowsAbout": ["Desarrollo de software", "Next.js", "TypeScript", "PostgreSQL", "Prisma"],
     "sameAs": ["https://github.com/LorenzoDrovandi7"]
   }
   </script>
@@ -59,13 +64,14 @@
       --accent-bright: #ffa53b;
       --accent-dim:  rgba(249,126,12,0.18);
       --accent-glow:   rgba(249,126,12,0.08);
+      --on-accent:   #1c0d00;
+      --on-accent-soft: rgba(28,13,0,.92);
       --text:        #ffffff;
       --text-mid:    #c8c0b8;
       --text-dim:    #9a9088;
       --border:      rgba(240,236,230,0.07);
       --border-accent: rgba(249,126,12,0.3);
       --nav-bg:      rgba(10,10,10,0.92);
-      --eagle-opacity: 0.045;
     }
     body.light {
       --bg:          #f5f3f0;
@@ -73,17 +79,18 @@
       --bg3:         #e8e4df;
       --surface:     #ffffff;
       --surface2:    #f9f7f4;
-      --accent:      #c25e00;
-      --accent-bright: #e87400;
-      --accent-dim:  rgba(194,94,0,0.12);
-      --accent-glow:   rgba(194,94,0,0.06);
+      --accent:      #9a4d00;
+      --accent-bright: #7c3e00;
+      --accent-dim:  rgba(154,77,0,0.12);
+      --accent-glow:   rgba(154,77,0,0.06);
+      --on-accent:   #ffffff;
+      --on-accent-soft: rgba(255,255,255,.92);
       --text:        #000000;
       --text-mid:    #333333;
       --text-dim:    #555555;
       --border:      rgba(0,0,0,0.09);
-      --border-accent: rgba(194,94,0,0.30);
+      --border-accent: rgba(154,77,0,0.30);
       --nav-bg:      rgba(245,243,240,0.94);
-      --eagle-opacity: 0.055;
     }
 
     *,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
@@ -253,6 +260,23 @@
     body.light .t-icon.sun  { opacity: 1 }
     body.light .t-icon.moon { opacity: 0 }
 
+    /* MENU BTN (solo móvil) */
+    .menu-btn {
+      display: none;
+      width: 40px; height: 40px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: none;
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 5px;
+    }
+    .menu-btn span {
+      display: block; width: 18px; height: 2px;
+      background: var(--text);
+      transition: transform .25s, opacity .25s;
+    }
+
     /* ── HERO ─────────────────────────────────────────────── */
     .hero {
       min-height: 100vh;
@@ -321,7 +345,7 @@
     /* Buttons */
     .btn-primary {
       background: var(--accent);
-      color: #fff;
+      color: var(--on-accent);
       border: none;
       padding: .9rem 2.2rem;
       font-family: 'DM Mono', monospace;
@@ -366,12 +390,6 @@
       overflow: hidden;
       border-left: 1px solid var(--border);
     }
-    .hero-right-inner {
-      display: flex; flex-direction: column;
-      gap: .8px;
-      width: 100%; height: 100%;
-      position: absolute; inset: 0;
-    }
     .grid-col {
       position: absolute;
       top: 0; bottom: 0;
@@ -390,29 +408,6 @@
       background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 72%);
       pointer-events: none;
       opacity: 100%;
-    }
-    .hero-badge {
-      position: absolute;
-      bottom: 4rem; right: 3rem;
-      width: 108px; height: 108px;
-      border-radius: 50%;
-      border: 1px solid var(--border-accent);
-      display: flex; align-items: center; justify-content: center;
-      text-align: center;
-      font-size: .65rem;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      animation: spin 22s linear infinite;
-      z-index: 3;
-    }
-    @keyframes spin { to { transform: rotate(360deg) } }
-    .badge-dot {
-      position: absolute;
-      width: 5px; height: 5px;
-      background: var(--accent);
-      border-radius: 50%;
-      top: -2.5px; left: 50%; transform: translateX(-50%);
     }
     .scroll-indicator {
       position: absolute; bottom: 2rem; left: 4rem;
@@ -647,15 +642,14 @@
     .project-card.project-cta::before,
     .project-card.project-cta::after { display: none }
     .project-card.project-cta:hover { background: var(--accent-bright) }
-    .project-card.project-cta .project-index { color: rgba(255,255,255,.28) }
-    .project-card.project-cta .project-tag { color: rgba(255,255,255,.8) }
-    .project-card.project-cta .project-name { color: #fff }
-    .project-card.project-cta .project-desc { color: rgba(255,255,255,.88) }
+    .project-card.project-cta .project-tag { color: var(--on-accent) }
+    .project-card.project-cta .project-name { color: var(--on-accent) }
+    .project-card.project-cta .project-desc { color: var(--on-accent-soft) }
     .project-card.project-cta .project-arrow {
-      border-color: rgba(255,255,255,.5); color: #fff;
+      border-color: var(--on-accent); color: var(--on-accent);
     }
     .project-card.project-cta:hover .project-arrow {
-      border-color: #fff; color: #fff;
+      border-color: var(--on-accent); color: var(--on-accent);
       transform: translate(3px,-3px);
     }
 
@@ -668,6 +662,7 @@
     }
     .services-label { margin-bottom: 3.5rem }
     .services-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; }
+    .timeline-grid { grid-template-columns: repeat(5,1fr); }
     .service-item {
       padding: 2.5rem;
       border-left: 1px solid var(--border);
@@ -718,6 +713,11 @@
       color: var(--accent); font-size: .72rem;
       letter-spacing: .2em; text-transform: uppercase; min-width: 75px;
     }
+    .contact-info-item a {
+      color: var(--text-mid); text-decoration: none;
+      transition: color .3s;
+    }
+    .contact-info-item a:hover { color: var(--accent) }
 
     /* Form */
     .contact-form { display: flex; flex-direction: column; gap: 1.5rem }
@@ -744,7 +744,7 @@
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem }
     .form-submit {
       background: var(--accent);
-      color: #fff; border: none;
+      color: var(--on-accent); border: none;
       padding: 1rem 2.2rem;
       font-family: 'DM Mono', monospace;
       font-size: .78rem; letter-spacing: .2em;
@@ -758,6 +758,7 @@
       transform: translateY(-2px);
     }
     .form-note { font-size: .72rem; color: var(--text-dim); line-height: 1.75 }
+    .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden }
     .success-msg {
       display: none;
       background: var(--accent-dim);
@@ -830,15 +831,17 @@
       from { opacity: 0; transform: translateY(30px) }
       to   { opacity: 1; transform: translateY(0) }
     }
-    @keyframes fadeIn {
-      from { opacity: 0 } to { opacity: 1 }
-    }
-    .reveal {
-      opacity: 0; transform: translateY(32px);
-      transition: opacity .9s cubic-bezier(.25,.46,.45,.94),
-                  transform .9s cubic-bezier(.25,.46,.45,.94);
-    }
     .reveal.visible { opacity: 1; transform: translateY(0) }
+
+    /* ── MOVIMIENTO REDUCIDO ────────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+      html { scroll-behavior: auto }
+      .reveal { opacity: 1; transform: none }
+    }
 
     /* ── RESPONSIVE ────────────────────────────────────────── */
     @media (hover: none) and (pointer: coarse) {
@@ -862,8 +865,29 @@
         padding: .8rem 1.5rem;
       }
       .nav-links { display: none }
+      .menu-btn { display: flex }
+      nav.open .nav-links {
+        display: flex;
+        position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; gap: 0;
+        background: var(--nav-bg);
+        border-bottom: 1px solid var(--border);
+        padding: .5rem 1.5rem 1rem;
+      }
+      nav.open .nav-links a { padding: .9rem 0; border-bottom: 1px solid var(--border) }
+      nav.open .nav-links a:last-child { border-bottom: none }
+      nav.open .nav-links a::after { display: none }
+      nav.open .menu-btn span:nth-child(1) { transform: translateY(7px) rotate(45deg) }
+      nav.open .menu-btn span:nth-child(2) { opacity: 0 }
+      nav.open .menu-btn span:nth-child(3) { transform: translateY(-7px) rotate(-45deg) }
       .hero { grid-template-columns: 1fr }
-      .hero-right { display: none }
+      .hero-right {
+        display: flex;
+        border-left: none;
+        border-top: 1px solid var(--border);
+        padding: 2.5rem 1.5rem;
+      }
+      .hero-number { width: min(78vw,440px); height: auto }
       .hero-left { padding: 7rem 1.5rem 4rem }
       .hero-name { font-size: clamp(3rem, 12vw, 4.5rem) }
       .hero-sub { font-size: 1.05rem; max-width: 100% }
@@ -888,6 +912,7 @@
       .project-desc { font-size: .78rem }
       .services { padding: 4rem 1.5rem }
       .services-grid { grid-template-columns: 1fr }
+      .timeline-grid { grid-template-columns: 1fr }
       .service-item { padding: 2rem 1.5rem; border-left: none; border-bottom: 1px solid var(--border) }
       .service-item:first-child { border-left: none }
       .service-item:last-child { border-bottom: none }
@@ -933,8 +958,6 @@
       .band-word { font-size: .75rem; letter-spacing: .3em }
       .about-heading { font-size: clamp(1.5rem, 7vw, 1.8rem) }
       .contact-heading { font-size: clamp(1.8rem, 9vw, 2.2rem) }
-      .hero-number { font-size: clamp(8rem, 30vw, 12rem) }
-      .eagle-bg img { width: 100vw; opacity: calc(var(--eagle-opacity) * 1.5) }
     }
   </style>
 </head>
@@ -954,13 +977,17 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo">Lorenzo Drovandi</div>
-  <div class="nav-links">
+  <div class="nav-links" id="navLinks">
     <a href="#sobre-mi">Sobre mí</a>
     <a href="#proyectos">Proyectos</a>
+    <a href="#trayectoria">Trayectoria</a>
     <a href="#servicios">Servicios</a>
     <a href="#contacto">Contacto</a>
   </div>
   <div style="display:flex;align-items:center;gap:.7rem;flex-shrink:0">
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
     <button class="theme-toggle" id="themeToggle" title="Modo día/noche" aria-label="Cambiar tema">
       <span class="t-icon moon">🌙</span>
       <span class="t-icon sun">☀️</span>
@@ -1005,9 +1032,13 @@
     <span class="pill">HTML</span>
     <span class="pill">CSS</span>
     <span class="pill">JavaScript</span>
-    <span class="pill">React</span>
-    <span class="pill">Tailwind</span>
+    <span class="pill">TypeScript</span>
+    <span class="pill">Next.js</span>
+    <span class="pill">Node.js</span>
     <span class="pill">PostgreSQL</span>
+    <span class="pill">Prisma</span>
+    <span class="pill">Cloudflare</span>
+    <span class="pill">PowerShell</span>
   </div>
 </div>
 
@@ -1034,10 +1065,10 @@
       </div>
     </div>
     <div class="stat-item">
-      <div class="stat-number">∞</div>
+      <div class="stat-number">75+</div>
       <div class="stat-desc">
-        <div class="stat-title">Trazabilidad</div>
-        <div class="stat-sub">Cada documento remite a su base legal y cada dato a su fuente: normativa vigente verificada, no promesas.</div>
+        <div class="stat-title">Código verificado</div>
+        <div class="stat-sub">Decenas de tests por proyecto: HormiLog supera los 75 y Deca Local enlaza cada exigencia legal con su test.</div>
       </div>
     </div>
     <div class="stat-item">
@@ -1081,7 +1112,7 @@
   </div>
   <div class="projects-grid">
     <a class="project-card reveal" href="https://redhormigon.com/" target="_blank" rel="noopener">
-      <div class="project-index">01</div>
+      <div class="project-index" aria-hidden="true">01</div>
       <p class="project-tag">// Directorio · Plantas</p>
       <h3 class="project-name">RedHormigon</h3>
       <p class="project-desc">Directorio de plantas de hormigón de España. Buscador por localidad con radio en km, mapa interactivo y presupuestos de obra.</p>
@@ -1091,7 +1122,7 @@
       <div class="project-arrow">→</div>
     </a>
     <div class="project-card reveal">
-      <div class="project-index">02</div>
+      <div class="project-index" aria-hidden="true">02</div>
       <p class="project-tag">// Normativa · Trazabilidad</p>
       <h3 class="project-name">Deca Local</h3>
       <p class="project-desc">Documento de control administrativo (DeCA) digital para el transporte de hormigón. Genera el PDF nativo con QR de descarga sin login antes de la salida, cumple la Ley 9/2025 y conserva cada documento un año sin posibilidad de borrado.</p>
@@ -1100,7 +1131,7 @@
       </div>
     </div>
     <div class="project-card reveal">
-      <div class="project-index">03</div>
+      <div class="project-index" aria-hidden="true">03</div>
       <p class="project-tag">// Automatización · IA local</p>
       <h3 class="project-name">Magi</h3>
       <p class="project-desc">Infraestructura local que convierte un objetivo en tareas ejecutables sobre el escritorio. Ejecutor determinista de 25 acciones sobre el árbol de accesibilidad, con bóveda de credenciales, watchdog y parada de emergencia. La IA decide, el ejecutor obedece, el humano conserva los secretos.</p>
@@ -1109,7 +1140,7 @@
       </div>
     </div>
     <div class="project-card reveal">
-      <div class="project-index">04</div>
+      <div class="project-index" aria-hidden="true">04</div>
       <p class="project-tag">// Documentos · Extracción</p>
       <h3 class="project-name">AutoDeca Transporte</h3>
       <p class="project-desc">Convierte el albarán de carga en PDF en un AutoDeca digital con QR. Lee la capa de texto por coordenadas, sin OCR: si el documento viene escaneado lo avisa en vez de inventar datos, y exige confirmación humana antes de emitir.</p>
@@ -1118,7 +1149,7 @@
       </div>
     </div>
     <a class="project-card reveal" href="https://genhorm.com/" target="_blank" rel="noopener">
-      <div class="project-index">05</div>
+      <div class="project-index" aria-hidden="true">05</div>
       <p class="project-tag">// Tipificaciones · Hormigón</p>
       <h3 class="project-name">GenHorm</h3>
       <p class="project-desc">Sistema de generación de tipificaciones para el sector del hormigón. Toda la información del tema disponible en un solo lugar.</p>
@@ -1128,7 +1159,7 @@
       <div class="project-arrow">→</div>
     </a>
     <div class="project-card reveal">
-      <div class="project-index">06</div>
+      <div class="project-index" aria-hidden="true">06</div>
       <p class="project-tag">// Planificación · Planta</p>
       <h3 class="project-name">HormiLog</h3>
       <p class="project-desc">Plan del día para una planta de hormigón: qué camión carga, a qué hora sale y cuándo entra en obra. Motor puro con más de 75 tests, Gantt por camión, obra y boca, y partes imprimibles. Funciona sin servidor, con los datos en el navegador.</p>
@@ -1137,7 +1168,7 @@
       </div>
     </div>
     <a class="project-card reveal" href="https://www.hormigoneros.com" target="_blank" rel="noopener">
-      <div class="project-index">07</div>
+      <div class="project-index" aria-hidden="true">07</div>
       <p class="project-tag">// Club · Mercado</p>
       <h3 class="project-name">Hormigoneros</h3>
       <p class="project-desc">Club de empresas del hormigón en producción. Tablón de anuncios con registro, moderación y publicación; acceso con email o Google, fotos y mapa de camiones.</p>
@@ -1147,7 +1178,6 @@
       <div class="project-arrow">→</div>
     </a>
     <a class="project-card project-cta reveal" href="#contacto">
-      <div class="project-index">06</div>
       <p class="project-tag">// Tu proyecto</p>
       <h3 class="project-name">¿Tienes algo en mente?</h3>
       <p class="project-desc">Cuéntame qué necesitas. Si tiene que ver con software, es mi territorio.</p>
@@ -1156,9 +1186,41 @@
   </div>
 </section>
 
+<!-- TIMELINE -->
+<section class="services" id="trayectoria">
+  <p class="section-label services-label reveal">// 03 — Trayectoria</p>
+  <div class="services-grid timeline-grid">
+    <div class="service-item reveal">
+      <div class="service-icon">◆</div>
+      <div class="service-name">GenHorm v1.1</div>
+      <div class="service-desc">Mayo 2026 · Tipificador según Código Estructural, EHE-08 y UNE-EN 206.</div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-icon">◆</div>
+      <div class="service-name">Hormigoneros en producción</div>
+      <div class="service-desc">Octubre 2026 · Club de empresas con registro, moderación y publicación.</div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-icon">◆</div>
+      <div class="service-name">Deca Local</div>
+      <div class="service-desc">Octubre 2026 · DeCA digital conforme a la Ley 9/2025, con trazabilidad normativa.</div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-icon">◆</div>
+      <div class="service-name">HormiLog</div>
+      <div class="service-desc">Octubre 2026 · Planificador de planta con motor puro y más de 75 tests.</div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-icon">◆</div>
+      <div class="service-name">Magi</div>
+      <div class="service-desc">Noviembre 2026 · Infraestructura local multiagente: 25 acciones, bóveda y watchdog.</div>
+    </div>
+  </div>
+</section>
+
 <!-- SERVICES -->
 <section class="services" id="servicios">
-  <p class="section-label services-label reveal">// 03 — Qué puedo hacer por tu empresa</p>
+  <p class="section-label services-label reveal">// 04 — Qué puedo hacer por tu empresa</p>
   <div class="services-grid">
     <div class="service-item reveal">
       <div class="service-icon">◈</div>
@@ -1186,10 +1248,12 @@
 <!-- CONTACT -->
 <section class="contact" id="contacto">
   <div class="contact-left reveal">
-    <p class="section-label">// 04 — Contacto</p>
+    <p class="section-label">// 05 — Contacto</p>
     <h2 class="contact-heading">¿Tienes un proyecto<br />en <span>mente?</span></h2>
     <p class="contact-sub">Cuéntame qué necesitas. Ya sea un desarrollo desde cero, una integración o una mejora de proceso — si tiene que ver con software, es mi territorio.</p>
     <div class="contact-info">
+      <div class="contact-info-item"><span>Email</span><a href="mailto:lorenzodrovandi17@gmail.com">lorenzodrovandi17@gmail.com</a></div>
+      <div class="contact-info-item"><span>GitHub</span><a href="https://github.com/LorenzoDrovandi7" target="_blank" rel="noopener">github.com/LorenzoDrovandi7</a></div>
       <div class="contact-info-item"><span>Sector</span><span>Software · Tecnología · Hormigón</span></div>
       <div class="contact-info-item"><span>Disponible</span><span>Proyectos nuevos · Colaboraciones</span></div>
     </div>
@@ -1203,8 +1267,9 @@
       <div class="form-group"><label class="form-label" for="iEmail">Email</label><input type="email" class="form-input" id="iEmail" name="email" placeholder="tu@email.com" required/></div>
       <div class="form-group"><label class="form-label" for="iProyecto">Tipo de proyecto</label><input type="text" class="form-input" id="iProyecto" name="proyecto" placeholder="Ej: Sistema de gestión para mi empresa"/></div>
       <div class="form-group"><label class="form-label" for="iMensaje">Mensaje</label><textarea class="form-textarea" id="iMensaje" name="mensaje" placeholder="Cuéntame sobre tu proyecto o necesidad..." required></textarea></div>
-      <div class="success-msg" id="successMsg">✓ Mensaje enviado. Te respondo en menos de 24h.</div>
-      <div class="error-msg" id="errorMsg">✗ Error al enviar. Inténtalo de nuevo o escríbeme directamente a lorenzodrovandi17@gmail.com</div>
+      <div class="hp-field" aria-hidden="true"><label>Dejar vacío<input type="text" class="form-input" id="iSitio" name="website" tabindex="-1" autocomplete="off" /></label></div>
+      <div class="success-msg" id="successMsg" role="status" aria-live="polite">✓ Mensaje enviado. Te respondo en menos de 24h.</div>
+      <div class="error-msg" id="errorMsg" role="alert" aria-live="assertive">✗ Error al enviar. Inténtalo de nuevo o escríbeme directamente a lorenzodrovandi17@gmail.com</div>
       <button class="form-submit" id="formSubmitBtn" type="submit">Enviar mensaje →</button>
       <p class="form-note">Respondo en menos de 24h. Sin spam, sin rodeos. Solo trabajo serio.</p>
     </form>
@@ -1218,6 +1283,10 @@
   <div class="footer-main">
     <div class="footer-logo">Lorenzo Drovandi</div>
     <div class="footer-copy">© 2026 · Software a medida</div>
+    <div class="footer-links">
+      <a href="mailto:lorenzodrovandi17@gmail.com">Email</a>
+      <a href="https://github.com/LorenzoDrovandi7" target="_blank" rel="noopener">GitHub</a>
+    </div>
   </div>
   <div class="footer-legal">
     <a href="politica_cookies.html">Política de Cookies</a>
@@ -1228,8 +1297,32 @@
 
 <script>
   // THEME: el sitio abre siempre en claro; el oscuro es opcional por sesión.
-  document.getElementById('themeToggle').addEventListener('click', () => {
-    document.body.classList.toggle('light');
+  const themeBtn = document.getElementById('themeToggle');
+  themeBtn.setAttribute('aria-pressed', 'false');
+  themeBtn.addEventListener('click', () => {
+    const claro = document.body.classList.toggle('light');
+    themeBtn.setAttribute('aria-pressed', String(!claro));
+  });
+
+  // MENU MÓVIL
+  const navEl = document.querySelector('nav');
+  const menuBtn = document.getElementById('menuBtn');
+  function setMenu(abierto) {
+    navEl.classList.toggle('open', abierto);
+    menuBtn.setAttribute('aria-expanded', String(abierto));
+    menuBtn.setAttribute('aria-label', abierto ? 'Cerrar menú' : 'Abrir menú');
+    if (abierto) {
+      const primero = document.querySelector('.nav-links a');
+      if (primero) primero.focus();
+    }
+  }
+  menuBtn.addEventListener('click', () => setMenu(!navEl.classList.contains('open')));
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && navEl.classList.contains('open')) {
+      setMenu(false);
+      menuBtn.focus();
+    }
   });
 
   // CURSOR
@@ -1253,7 +1346,7 @@
   document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
 
   // FORM
-  const FORM_ENDPOINT = 'https://formspree.io/f/xlgvkydk'; // Reemplazar con tu endpoint de Formspree
+  const FORM_ENDPOINT = 'https://formspree.io/f/xlgvkydk';
 
   document.getElementById('contactForm').addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -1262,6 +1355,12 @@
     const em = document.getElementById('errorMsg');
     sm.style.display = 'none';
     em.style.display = 'none';
+    // Honeypot: los bots rellenan el campo oculto; se finge éxito sin enviar.
+    if (document.getElementById('iSitio').value) {
+      sm.style.display = 'block';
+      setTimeout(() => { sm.style.display = 'none'; }, 6000);
+      return;
+    }
     btn.classList.add('loading');
     btn.textContent = 'Enviando...';
 
