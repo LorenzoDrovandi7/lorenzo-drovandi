@@ -634,6 +634,27 @@
       transform: translate(3px,-3px);
     }
 
+    /* CTA card — cierra la rejilla y enlaza a contacto */
+    .project-card.project-cta {
+      background: var(--accent);
+      text-decoration: none;
+      display: block;
+    }
+    .project-card.project-cta::before,
+    .project-card.project-cta::after { display: none }
+    .project-card.project-cta:hover { background: var(--accent-bright) }
+    .project-card.project-cta .project-index { color: rgba(255,255,255,.28) }
+    .project-card.project-cta .project-tag { color: rgba(255,255,255,.8) }
+    .project-card.project-cta .project-name { color: #fff }
+    .project-card.project-cta .project-desc { color: rgba(255,255,255,.88) }
+    .project-card.project-cta .project-arrow {
+      border-color: rgba(255,255,255,.5); color: #fff;
+    }
+    .project-card.project-cta:hover .project-arrow {
+      border-color: #fff; color: #fff;
+      transform: translate(3px,-3px);
+    }
+
     /* ── SERVICES ─────────────────────────────────────────── */
     .services {
       padding: 7rem 4rem;
@@ -1058,7 +1079,7 @@
   <p class="section-label reveal" style="margin-bottom:1.5rem">// 02 — Proyectos</p>
   <div class="projects-header reveal">
     <h2 class="projects-title">Proyectos</h2>
-    <span class="projects-count">03 iniciativas activas</span>
+    <span class="projects-count">05 iniciativas activas</span>
   </div>
   <div class="projects-grid">
     <div class="project-card reveal">
@@ -1069,28 +1090,50 @@
       <div class="project-tech">
         <span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">PostgreSQL</span>
       </div>
-      <div class="project-arrow">→</div>
     </div>
     <div class="project-card reveal">
       <div class="project-index">02</div>
+      <p class="project-tag">// Normativa · Trazabilidad</p>
+      <h3 class="project-name">DecaHorm</h3>
+      <p class="project-desc">Documento de control administrativo (DeCA) digital para el transporte de hormigón. Genera el PDF nativo con QR de descarga sin login antes de la salida, cumple la Ley 9/2025 y conserva cada documento un año sin posibilidad de borrado.</p>
+      <div class="project-tech">
+        <span class="tech-tag">Node.js</span><span class="tech-tag">PDF nativo</span><span class="tech-tag">QR</span><span class="tech-tag">PWA</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-index">03</div>
+      <p class="project-tag">// Automatización · IA local</p>
+      <h3 class="project-name">Magi</h3>
+      <p class="project-desc">Infraestructura local que convierte un objetivo en tareas ejecutables sobre el escritorio. Ejecutor determinista de 25 acciones sobre el árbol de accesibilidad, con bóveda de credenciales, watchdog y parada de emergencia. La IA decide, el ejecutor obedece, el humano conserva los secretos.</p>
+      <div class="project-tech">
+        <span class="tech-tag">PowerShell</span><span class="tech-tag">UIAutomation</span><span class="tech-tag">RPA</span><span class="tech-tag">Multiagente</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-index">04</div>
+      <p class="project-tag">// Documentos · Extracción</p>
+      <h3 class="project-name">AutoDeca Transporte</h3>
+      <p class="project-desc">Convierte el albarán de carga en PDF en un AutoDeca digital con QR. Lee la capa de texto por coordenadas, sin OCR: si el documento viene escaneado lo avisa en vez de inventar datos, y exige confirmación humana antes de emitir.</p>
+      <div class="project-tech">
+        <span class="tech-tag">Next.js</span><span class="tech-tag">PDF.js</span><span class="tech-tag">Cloudflare Workers</span><span class="tech-tag">Playwright</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-index">05</div>
       <p class="project-tag">// Tipificaciones · Hormigón</p>
       <h3 class="project-name">GenHorm</h3>
       <p class="project-desc">Sistema de generación de tipificaciones para el sector del hormigón. Toda la información del tema disponible en un solo lugar.</p>
       <div class="project-tech">
         <span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">Tailwind CSS</span>
       </div>
-      <div class="project-arrow">→</div>
     </div>
-    <div class="project-card reveal">
-      <div class="project-index">03</div>
-      <p class="project-tag">// Logística · Trazabilidad</p>
-      <h3 class="project-name">LogisticHorm</h3>
-      <p class="project-desc">Proximamente...</p>
-      <div class="project-tech">
-        <span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">Tailwind CSS</span>
-      </div>
+    <a class="project-card project-cta reveal" href="#contacto">
+      <div class="project-index">06</div>
+      <p class="project-tag">// Tu proyecto</p>
+      <h3 class="project-name">¿Tienes algo en mente?</h3>
+      <p class="project-desc">Cuéntame qué necesitas. Si tiene que ver con software, es mi territorio.</p>
       <div class="project-arrow">→</div>
-    </div>
+    </a>
   </div>
 </section>
 
