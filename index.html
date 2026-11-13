@@ -479,6 +479,17 @@
       font-weight: 300;
     }
     .about-heading em { font-style: italic; color: var(--accent) }
+    .about-top {
+      display: flex; gap: 2.5rem; align-items: center;
+      margin-bottom: 2rem;
+    }
+    .about-photo { margin: 0; flex: 0 0 220px }
+    .about-photo img {
+      width: 100%; height: auto; display: block;
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--accent);
+    }
+    .about-top .about-heading { margin-bottom: 0 }
     .about-body {
       color: var(--text-mid);
       font-size: .85rem;
@@ -662,7 +673,8 @@
     }
     .services-label { margin-bottom: 3.5rem }
     .services-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; }
-    .timeline-grid { grid-template-columns: repeat(5,1fr); }
+    .timeline-grid { grid-template-columns: repeat(7,1fr); }
+    .timeline-grid .service-item { padding: 1.8rem 1.2rem; }
     .service-item {
       padding: 2.5rem;
       border-left: 1px solid var(--border);
@@ -858,6 +870,8 @@
       .contact { padding: 6rem 2.5rem; gap: 4rem }
       .project-card { padding: 2.5rem 2rem }
       .service-item { padding: 2rem 1.8rem }
+      .timeline-grid { grid-template-columns: repeat(4,1fr) }
+      .timeline-grid .service-item { padding: 2rem 1.5rem }
     }
 
     @media(max-width:900px) {
@@ -896,6 +910,8 @@
       .btn-primary, .btn-secondary { font-size: .7rem; padding: .8rem 1.6rem; width: 100%; text-align: center }
       .about { grid-template-columns: 1fr }
       .about-text { padding: 4rem 1.5rem; border-right: none; border-bottom: 1px solid var(--border) }
+      .about-top { flex-direction: column; align-items: flex-start; gap: 1.5rem }
+      .about-photo { flex: none; width: min(240px, 100%) }
       .about-body { font-size: .8rem; max-width: 100% }
       .about-stats { padding: 4rem 1.5rem }
       .stat-item { gap: 1.2rem; padding: 1.8rem 0 }
@@ -1046,7 +1062,12 @@
 <section class="about" id="sobre-mi">
   <div class="about-text reveal">
     <p class="section-label">// 01 — Sobre mí</p>
-    <h2 class="about-heading">Código que nació<br /><em>ambicioso.</em></h2>
+    <div class="about-top">
+      <figure class="about-photo reveal">
+        <img src="foto.webp" alt="Retrato de Lorenzo Drovandi" width="640" height="1013" loading="lazy" />
+      </figure>
+      <h2 class="about-heading">Código que nació<br /><em>ambicioso.</em></h2>
+    </div>
     <p class="about-body">Soy Lorenzo Drovandi, desarrollador full-stack apasionado por construir soluciones digitales que hablan el idioma de los negocios reales: logística, producción, control y trazabilidad.<br /><br />No solo escribo código — entiendo los procesos detrás de cada empresa. Eso me permite crear herramientas que se integran de verdad con el trabajo cotidiano, reduciendo fricciones y aumentando la eficiencia operativa desde el primer día.</p>
     <div class="about-ornament">
       <div class="orn-line"></div>
@@ -1197,6 +1218,11 @@
     </div>
     <div class="service-item reveal">
       <div class="service-icon">◆</div>
+      <div class="service-name">RedHormigon</div>
+      <div class="service-desc">2026 · Directorio de plantas con buscador, mapa y presupuestos.</div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-icon">◆</div>
       <div class="service-name">Hormigoneros en producción</div>
       <div class="service-desc">Octubre 2026 · Club de empresas con registro, moderación y publicación.</div>
     </div>
@@ -1213,7 +1239,12 @@
     <div class="service-item reveal">
       <div class="service-icon">◆</div>
       <div class="service-name">Magi</div>
-      <div class="service-desc">Noviembre 2026 · Infraestructura local multiagente: 25 acciones, bóveda y watchdog.</div>
+      <div class="service-desc">Octubre 2026 · Infraestructura local multiagente: 25 acciones, bóveda y watchdog.</div>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-icon">◆</div>
+      <div class="service-name">AutoDeca Transporte</div>
+      <div class="service-desc">Noviembre 2026 · Del albarán en PDF al documento digital con QR.</div>
     </div>
   </div>
 </section>
