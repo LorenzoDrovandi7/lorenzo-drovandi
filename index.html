@@ -933,14 +933,7 @@
     }
   </style>
 </head>
-<body>
-
-<script>
-  // Restaura el tema guardado antes del primer pintado para evitar destellos.
-  try {
-    if (localStorage.getItem('ld-tema') === 'claro') document.body.classList.add('light');
-  } catch (e) {}
-</script>
+<body class="light">
 
 <div class="top-line"></div>
 <div class="gothic-particles" aria-hidden="true">
@@ -1094,7 +1087,7 @@
     <div class="project-card reveal">
       <div class="project-index">02</div>
       <p class="project-tag">// Normativa · Trazabilidad</p>
-      <h3 class="project-name">DecaHorm</h3>
+      <h3 class="project-name">Deca Local</h3>
       <p class="project-desc">Documento de control administrativo (DeCA) digital para el transporte de hormigón. Genera el PDF nativo con QR de descarga sin login antes de la salida, cumple la Ley 9/2025 y conserva cada documento un año sin posibilidad de borrado.</p>
       <div class="project-tech">
         <span class="tech-tag">Node.js</span><span class="tech-tag">PDF nativo</span><span class="tech-tag">QR</span><span class="tech-tag">PWA</span>
@@ -1208,12 +1201,9 @@
 </footer>
 
 <script>
-  // THEME (persistente)
+  // THEME: el sitio abre siempre en claro; el oscuro es opcional por sesión.
   document.getElementById('themeToggle').addEventListener('click', () => {
     document.body.classList.toggle('light');
-    try {
-      localStorage.setItem('ld-tema', document.body.classList.contains('light') ? 'claro' : 'oscuro');
-    } catch (e) {}
   });
 
   // CURSOR
