@@ -100,6 +100,16 @@
     *,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
     html { scroll-behavior:smooth }
     section[id] { scroll-margin-top: 84px }
+    #contenido { scroll-margin-top: 84px }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px }
+    .skip-link {
+      position: absolute; left: 1rem; top: -5rem; z-index: 10000;
+      background: var(--accent); color: var(--on-accent);
+      padding: .7rem 1.2rem;
+      font-size: .75rem; letter-spacing: .18em; text-transform: uppercase;
+      text-decoration: none; transition: top .2s;
+    }
+    .skip-link:focus { top: 1rem }
     body {
       background: var(--bg);
       color: var(--text);
@@ -373,6 +383,7 @@
     }
     .btn-primary:hover { background: var(--accent-bright); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(254,126,8,.4) }
     .btn-primary:hover::after { transform: translateX(100%) }
+    .btn-primary:active, .form-submit:active { transform: translateY(0) scale(.99) }
     .btn-secondary {
       border: 1px solid var(--border);
       color: var(--text-mid);
@@ -1016,6 +1027,7 @@
   </style>
 </head>
 <body class="light">
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
 
 <div class="top-line"></div>
 <div class="gothic-particles" aria-hidden="true">
@@ -1051,7 +1063,7 @@
 </nav>
 
 <!-- MAIN CONTENT -->
-<main>
+<main id="contenido">
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
