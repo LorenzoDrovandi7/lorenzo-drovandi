@@ -634,11 +634,15 @@
       transform: translate(3px,-3px);
     }
 
+    /* Tarjetas que son enlaces (proyecto con URL pública) */
+    a.project-card { text-decoration: none }
+
     /* CTA card — cierra la rejilla y enlaza a contacto */
     .project-card.project-cta {
       background: var(--accent);
       text-decoration: none;
       display: block;
+      grid-column: span 2;
     }
     .project-card.project-cta::before,
     .project-card.project-cta::after { display: none }
@@ -878,6 +882,7 @@
       .projects-header { margin-bottom: 2.5rem; padding-bottom: 1.5rem; flex-direction: column; align-items: flex-start; gap: .8rem }
       .projects-title { font-size: clamp(2.5rem, 10vw, 3.5rem) }
       .projects-grid { grid-template-columns: 1fr }
+      .project-card.project-cta { grid-column: auto }
       .project-card { padding: 2rem 1.5rem }
       .project-name { font-size: 1.8rem }
       .project-desc { font-size: .78rem }
@@ -1072,7 +1077,7 @@
   <p class="section-label reveal" style="margin-bottom:1.5rem">// 02 — Proyectos</p>
   <div class="projects-header reveal">
     <h2 class="projects-title">Proyectos</h2>
-    <span class="projects-count">05 iniciativas activas</span>
+    <span class="projects-count">07 iniciativas activas</span>
   </div>
   <div class="projects-grid">
     <div class="project-card reveal">
@@ -1120,6 +1125,25 @@
         <span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span><span class="tech-tag">Tailwind CSS</span>
       </div>
     </div>
+    <div class="project-card reveal">
+      <div class="project-index">06</div>
+      <p class="project-tag">// Planificación · Planta</p>
+      <h3 class="project-name">HormiLog</h3>
+      <p class="project-desc">Plan del día para una planta de hormigón: qué camión carga, a qué hora sale y cuándo entra en obra. Motor puro con más de 75 tests, Gantt por camión, obra y boca, y partes imprimibles. Funciona sin servidor, con los datos en el navegador.</p>
+      <div class="project-tech">
+        <span class="tech-tag">JavaScript</span><span class="tech-tag">PWA</span><span class="tech-tag">TomTom</span><span class="tech-tag">Node</span>
+      </div>
+    </div>
+    <a class="project-card reveal" href="https://www.hormigoneros.com" target="_blank" rel="noopener">
+      <div class="project-index">07</div>
+      <p class="project-tag">// Club · Mercado</p>
+      <h3 class="project-name">Hormigoneros</h3>
+      <p class="project-desc">Club de empresas del hormigón en producción. Tablón de anuncios con registro, moderación y publicación; acceso con email o Google, fotos y mapa de camiones.</p>
+      <div class="project-tech">
+        <span class="tech-tag">Next.js</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">Prisma</span><span class="tech-tag">Vercel</span>
+      </div>
+      <div class="project-arrow">→</div>
+    </a>
     <a class="project-card project-cta reveal" href="#contacto">
       <div class="project-index">06</div>
       <p class="project-tag">// Tu proyecto</p>
